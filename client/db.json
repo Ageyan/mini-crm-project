@@ -1,0 +1,81 @@
+{
+  "clients": [
+    {
+      "id": "740cb174-cb5e-4ad7-b528-f89a293424eb",
+      "name": "Lida",
+      "email": "love@gmail.com",
+      "phone": "007",
+      "status": "active"
+    },
+    {
+      "id": "40cd62a3-6fcc-4bc0-b437-53a46c9d7d78",
+      "name": "Andrey",
+      "email": "husbender@gmail.com",
+      "phone": "5858",
+      "status": "active"
+    },
+    {
+      "id": "52511474-e1f3-4854-957f-522242af7149",
+      "name": "Him",
+      "email": "friend@gmail.com",
+      "phone": "1611",
+      "status": "active"
+    },
+    {
+      "id": "dde92064-2c07-47b9-9ce1-33b752fd4199",
+      "name": "34vq4tvq",
+      "email": "vqrtvqer",
+      "phone": "tvertverv",
+      "status": "active"
+    },
+    {
+      "id": "c5bbda65-81a3-40e6-afbc-dd970063c37f",
+      "name": "qert3",
+      "email": "45gert",
+      "phone": "ertwert",
+      "status": "active"
+    },
+    {
+      "name": "rvwervtwevrt",
+      "email": "343",
+      "phone": "3234234",
+      "status": "active",
+      "id": "a67d5d1d-19fb-4c5a-9858-9aa998f238f5"
+    },
+    {
+      "id": "65b637b2-b2c3-450d-ac23-8050b5d588fe",
+      "name": "evrtverv",
+      "email": "vwervtwervter",
+      "phone": "vtwerv",
+      "status": "active"
+    },
+    {
+      "id": "8f5a0309-1157-42fe-b1cd-fe35b1eb2fdf",
+      "name": "wwerwecrwc",
+      "email": "wcecrwe",
+      "phone": "crwcercwc",
+      "status": "active"
+    },
+    {
+      "id": "f2129281-9d4f-46fa-a70e-18f69dd39508",
+      "name": "Abu",
+      "email": "aadd@gmail.com",
+      "phone": "097756474",
+      "status": "active"
+    }
+  ],
+  "tasks": [
+    {
+      "id": "df60",
+      "title": "Love",
+      "status": "todo",
+      "clientId": "740cb174-cb5e-4ad7-b528-f89a293424eb"
+    },
+    {
+      "id": "a996",
+      "title": "Me",
+      "status": "todo",
+      "clientId": "40cd62a3-6fcc-4bc0-b437-53a46c9d7d78"
+    }
+  ]
+}
