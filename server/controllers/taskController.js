@@ -11,7 +11,9 @@ export const createTask = async(req, res) => {
 
         const task = await Task.create(taskObj);
 
-        return res.status(201).json(task)
+        const populatedTask = await task.populate('clientId');
+
+        return res.status(201).json(populatedTask)
     } catch (e) {
         res.status(400).json({message: 'Failed to create the task'})
     }

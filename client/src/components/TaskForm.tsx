@@ -12,7 +12,7 @@ type TaskFormProps = {
 function TaskForm({form, setForm, clients, handleSubmit, editingTask} : TaskFormProps) {
 
   return (
-    <>
+    <div style={{'marginBottom': "50px"}}>
         <input
             className="tasks-search-input"
             placeholder="Task title"
@@ -25,8 +25,9 @@ function TaskForm({form, setForm, clients, handleSubmit, editingTask} : TaskForm
         <select
             value={form.clientId}
             onChange={(e) => setForm({...form, clientId: e.target.value})}
+            className="tasks-select-btn"
         >
-            <option value={0}>Select client</option>
+            <option value="">Select client</option>
             {clients.map((c) => (
             <option key={c.id} value={c.id}>
                 {c.name}
@@ -34,8 +35,8 @@ function TaskForm({form, setForm, clients, handleSubmit, editingTask} : TaskForm
             ))}
         </select>
 
-        <button onClick={handleSubmit}>{editingTask ? "Save task" : "Add task"}</button>
-    </>
+        <button className="task-input-btn" onClick={handleSubmit}>{editingTask ? "Save task" : "Add task"}</button>
+    </div>
   )
 }
 

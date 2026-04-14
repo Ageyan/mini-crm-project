@@ -60,7 +60,7 @@ body {
 .crm-title {
   font-size: 72px;
   color: #ffffff;
-  margin-bottom: 120px;
+  margin-bottom: 60px;
   text-align: left;
 }
 
@@ -69,7 +69,7 @@ body {
   width: 40vw;
   align-items: center;
   justify-content: space-between;
-  margin: 0 auto 90px;
+  margin: 0 auto 60px;
 }
 
 .nav-link {
@@ -213,12 +213,14 @@ body {
 }
 
 .client-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
   width: 80vw;
+  justify-content: center;
   margin: 0 auto;
   border-radius: 20px;
   border: 1px solid var(--btn-color);
   background: linear-gradient(40deg,rgba(18, 17, 17, 1) 8%, rgba(26, 28, 28, 1) 43%, rgba(19, 20, 20, 1) 88%);
-  display: flex;
   padding: 48px 22px;
   gap: 30px;
   flex-wrap: wrap;
@@ -235,6 +237,7 @@ body {
   font-size: 18px;
   transition: transform 0.5s;
   transform: scale(1);
+  margin: 0 auto;
 }
 
 .client-item-container:hover {
@@ -276,11 +279,12 @@ body {
   display: flex;
   width: 230px;
   flex-direction: column; 
-  padding: 20px 30px;
+  padding: 48px 30px;
   gap: 40px;
   border: 1px solid var(--btn-color);
   border-radius: 20px;
   background: linear-gradient(40deg,rgba(18, 17, 17, 1) 8%, rgba(26, 28, 28, 1) 43%, rgba(19, 20, 20, 1) 88%);
+  height: 500px;
 }
 
 .tasks-filter-btn {
@@ -311,7 +315,58 @@ body {
 
 .tasks-form-container {
   flex-grow: 1;
-  padding: 20px 0px;
+  width: 60vw;
+  margin: 0 auto;
+  border-radius: 20px;
+  border: 1px solid var(--btn-color);
+  background: linear-gradient(40deg,rgba(18, 17, 17, 1) 8%, rgba(26, 28, 28, 1) 43%, rgba(19, 20, 20, 1) 88%);
+  display: flex;
+  padding: 48px 22px;
+  gap: 30px;
+  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr); 
+  justify-content: center; 
+}
+
+.task-item-container {
+  width: 328px;
+  height: 220px;
+  border-radius: 20px;
+  background: var(--bg-color);
+  padding: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 18px;
+  transition: transform 0.5s;
+  transform: scale(1);
+  margin: 0 auto;
+}
+
+.task-item-container:hover {
+  transform: scale(1.1);
+}
+
+.task-item-btn {
+  color: white;
+  background: black;
+  padding: 4px 10px;
+  margin: 0 auto;
+  width: 200px;
+  height: 40px;
+  font-size: 14px;
+  border-radius: 16px;
+  cursor: pointer;
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-weight: 400;
+  border: 1px solid rgb(35, 35, 36);
+  transition: color 0.5s ease-in-out ,background 0.5s ease-in-out;
+}
+
+.task-item-btn:hover {
+  background: rgb(138, 138, 144);
+  color: black;
 }
 
 .tasks-search-input {
@@ -326,3 +381,30 @@ body {
   margin-right: 20px;
 }
 
+.tasks-select-btn {
+  width: 120px;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-weight: 400; 
+  margin-right: 20px;
+}
+
+.task-input-btn { 
+  color: white;
+  background: var(--btn-color);
+  width: 180px;
+  height: 70px;
+  font-size: 18px;
+  border-radius: 20px;
+  cursor: pointer;
+  font-family: "Special Gothic Expanded One", sans-serif;
+  font-weight: 400;
+  border: 1ps solid white;
+  transition: color 0.5s ease-in-out, background 0.5s ease-in-out;
+}
+
+.task-input-btn:hover {
+  color: black;
+  background: var(--btn-hov-color);
+}
