@@ -8,4 +8,8 @@ export interface Task {
     status: TaskStatus;
 };
 
-export type NewTask = Omit<Task, "id">;
+// export type NewTask = Omit<Task, "id">;
+
+export type NewTask = Omit<Task, "id" | "clientId"> & {
+    clientId: string;
+};

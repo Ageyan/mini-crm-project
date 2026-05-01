@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
+/* @import url('https://fonts.googleapis.com/css2?family=Special+Gothic+Expanded+One&display=swap');
 
 *,
 *::before,
@@ -47,17 +47,17 @@ body {
   font-style: normal;
   margin: 0;
   color: white;
-}
+} */
 
 /* ROOT */ 
-:root {
+/* :root {
   --bg-color: linear-gradient(40deg,rgba(40, 40, 46, 1) 15%, rgba(48, 62, 66, 1) 50%, rgba(33, 36, 36, 1) 85%);
   --btn-color: #303E42;
   --btn-hov-color: #636E78;
-}
+} */
 
 /* MainLayout */
-.crm-title {
+/* .crm-title {
   font-size: 72px;
   color: #ffffff;
   margin-bottom: 60px;
@@ -100,17 +100,17 @@ body {
   font-weight: 400;
   border-radius: 20px;
   cursor: pointer;
-  border: 1ps solid white;
+  border: 1px solid white;
   transition: color 0.5s ease-in-out, background 0.5s ease-in-out;
 }
 
 .crm-button-logout:hover {
   color: black;
   background: var(--btn-hov-color);
-}
+} */
 
 /* Login */
-.login-container {
+/* .login-container {
   display: flex;
   flex-direction: column;
   gap: 35px;
@@ -137,7 +137,7 @@ body {
   cursor: pointer;
   font-family: "Special Gothic Expanded One", sans-serif;
   font-weight: 400;
-  border: 1ps solid white;
+  border: 1px solid white;
   margin: 0 auto;
   transition: color 0.5s ease-in-out, background 0.5s ease-in-out;
 }
@@ -145,10 +145,10 @@ body {
 .login-button:hover {
   color: black;
   background: var(--btn-hov-color);
-}
+} */
 
 /* Dashboard */
-.dash-container {
+/* .dash-container {
   width: 40vw;
   margin: 0 auto;
   border-radius: 20px;
@@ -167,10 +167,10 @@ body {
 
 .dash-text {
   color: white;
-}
+} */
 
 /* Clients */
-.client-form-container {
+/* .client-form-container {
   display: flex;
   width: 40vw;
   flex-direction: column;
@@ -263,10 +263,10 @@ body {
 .client-item-btn:hover {
   background: rgb(138, 138, 144);
   color: black;
-}
+} */
 
 /* Tasks */
-.tasks-container {
+/* .tasks-container {
   display: flex;
   width: 90vw;
   justify-content: space-between;
@@ -298,7 +298,7 @@ body {
   cursor: pointer;
   font-family: "Special Gothic Expanded One", sans-serif;
   font-weight: 400;
-  border: 1ps solid white;
+  border: 1px solid white;
   margin: 0 auto;
   transition: color 0.5s ease-in-out, background 0.5s ease-in-out;
 }
@@ -400,11 +400,11 @@ body {
   cursor: pointer;
   font-family: "Special Gothic Expanded One", sans-serif;
   font-weight: 400;
-  border: 1ps solid white;
+  border: 1px solid white;
   transition: color 0.5s ease-in-out, background 0.5s ease-in-out;
 }
 
 .task-input-btn:hover {
   color: black;
   background: var(--btn-hov-color);
-}
+} */

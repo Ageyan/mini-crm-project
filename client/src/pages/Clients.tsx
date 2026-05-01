@@ -22,29 +22,6 @@ function Clients() {
     getClients().then(setClients);
   },[]);
 
-  useEffect(() => {
-    if(editingClient) {
-      setForm({
-        name: editingClient.name,
-        email: editingClient.email, 
-        phone: editingClient.phone, 
-        status: editingClient.status
-      })
-    }
-  }, [editingClient])
-
-  // const handleAddClient = async() => {
-  //   const newClient: NewClient = {
-  //     name: "New Client",
-  //     email: "new@gamail.com",
-  //     phone: "38098000000", 
-  //     status: "active"
-  //   }
-
-  //   const createdClient = await addClient(newClient);
-  //   setClients((prev) => [...prev, createdClient]);
-  // };
-
   const handleDeleteClient = async (id: string) => {
     await deleteClient(id);
     setClients((prev) => prev.filter((c) => c.id !== id));
@@ -74,9 +51,23 @@ function Clients() {
     });
   };
 
+  const toggleClientStatus = async(client: Client) => {
+    const newStatus = client.status === 'active' ? 'inactive' : 'active';
+    const updated = await updateClient(client.id, {...client, status: newStatus});
+    setClients((prev) => prev.map((c) => (c.id === updated.id ? updated : c)));
+  }
+
   return (
     <>
-      <ClientForm form={form} setForm={setForm} handleSubmit={handleSubmit} editingClient={editingClient} clients={clients} handleDeleteClient={handleDeleteClient}  setEditingClient={setEditingClient}/>
+      <ClientForm 
+        form={form} 
+        setForm={setForm} 
+        handleSubmit={handleSubmit} 
+        editingClient={editingClient} 
+        clients={clients} 
+        handleDeleteClient={handleDeleteClient}  
+        setEditingClient={setEditingClient} 
+        toggleClientStatus={toggleClientStatus}/>
     </>
   )
 }

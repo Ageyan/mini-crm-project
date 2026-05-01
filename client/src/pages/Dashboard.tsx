@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
-import type { Client } from "../types/clients";
-import type { Task } from "../types/task";
+import { useState, useEffect } from "react";
 import { getClients } from "../services/clientService";
 import { getTasks } from "../services/taskService";
-
+import type { Client } from "../types/clients";
+import type { Task } from "../types/task";
 
 function Dashboard() {
   const [clients, setClients] = useState<Client[]>([]);
@@ -12,32 +11,58 @@ function Dashboard() {
   useEffect(() => {
     getClients().then(setClients);
     getTasks().then(setTasks);
-  }, [])
+  }, []);
+
+  const activeTasksCount = tasks.filter(t => t.status !== 'done').length;
+  const doneTasksCount = tasks.filter(t => t.status === 'done').length;
+  const completionRateTasks = tasks.length > 0 ? Math.round((doneTasksCount / tasks.length) * 100) : 0;
+
+  const activeClientsCount = clients.filter(c => c.status === 'active').length;
+  const completionRateClients = clients.length > 0 ? Math.round((activeClientsCount / clients.length) * 100) : 0;
+
 
   return (
-    <>
-      {/* <h2 className="page-title">Dashboard</h2> */}
-
-      <div className="dash-container">
-        <ul className="dash-list">
-          <li><p className="dash-text">Total clients: {clients.length}</p></li>
-          <li>
-            <p className="dash-text">
-              Active clients: {" "}
-              {clients.filter((c) => c.status === 'active').length}
-            </p>
-          </li>
-          <li><p className="dash-text">Total tasks: {tasks.length}</p></li>
-          <li>
-            <p className="dash-text">
-              Active tasks: {" "}
-              {tasks.filter((t) => t.status === 'done').length}
-            </p>
-          </li>
-        </ul>
+    <div className="dash">
+  
+      <div className="dash__grid">
+        <div className="dash-card">
+          <h3 className="dash-card__label">Clients</h3>
+          <div className="dash-card__content">
+            <span className="dash-card__number">{clients.length}</span>
+            <p className="dash-card__desc">Total registered</p>
+          </div>
+        </div>
+        <div className="dash-card">
+          <h3 className="dash-card__label">Tasks</h3>
+          <div className="dash-card__content">
+            <span className="dash-card__number">{activeTasksCount}</span>
+            <p className="dash-card__desc">Active currently</p>
+          </div>
+        </div>
+        <div className="dash-card dash-card--accent">
+          <h3 className="dash-card__label">Efficiency Clients</h3>
+          <div className="dash-card__content">
+            <span className="dash-card__number">{completionRateClients}%</span>
+            <div className="dash-card__progress-bar">
+               <div className="dash-card__progress-fill" style={{ width: `${completionRateClients}%` }}></div>
+            </div>
+            <p className="dash-card__desc">Active clients : {activeClientsCount}/{clients.length}</p>
+          </div>
+        </div>
+        <div className="dash-card dash-card--accent">
+          <h3 className="dash-card__label">Efficiency Tasks</h3>
+          <div className="dash-card__content">
+            <span className="dash-card__number">{completionRateTasks}%</span>
+            <div className="dash-card__progress-bar">
+               <div className="dash-card__progress-fill" style={{ width: `${completionRateTasks}%` }}></div>
+            </div>
+            <p className="dash-card__desc">Tasks completed : {doneTasksCount}/{tasks.length}</p>
+          </div>
+        </div>
       </div>
-    </>
-  )
+    </div>
+  );
 }
 
 export default Dashboard;
+

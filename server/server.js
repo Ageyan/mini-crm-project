@@ -16,3 +16,5 @@ app.use('/clients', clientRouter)
 app.listen(port, () => {
     console.log(`Server listening on port ${port} and startting at http://localhost:${port}`)
 })
+
+export default app;

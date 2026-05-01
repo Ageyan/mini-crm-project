@@ -1,5 +1,7 @@
+import { useState, useEffect } from "react";
 import type { Task, NewTask } from "../types/task";
 import type { Client } from "../types/clients";
+
 
 type TaskFormProps = {
     form: NewTask;
@@ -10,34 +12,67 @@ type TaskFormProps = {
 }
 
 function TaskForm({form, setForm, clients, handleSubmit, editingTask} : TaskFormProps) {
+    const [isOpen, setIsOpen] = useState(false);
+
+    const selectedClient = clients.find(c => c.id === form.clientId);
+
+    useEffect(() => {
+        const closeSelect = () => setIsOpen(false);
+        if (isOpen) window.addEventListener('click', closeSelect);
+        return () => window.removeEventListener('click', closeSelect);
+    }, [isOpen]);
 
   return (
-    <div style={{'marginBottom': "50px"}}>
+    <div className="tasks-form">
         <input
-            className="tasks-search-input"
+            className="tasks-form__input"
             placeholder="Task title"
             value={form.title}
             onChange={(e) =>
             setForm({ ...form, title: e.target.value })
             }
         />
+        <div className="custom-select">
+            <div 
+                className={`custom-select__trigger ${isOpen ? 'open' : ''}`} 
+                onClick={(e) => {
+                    setIsOpen(!isOpen);
+                    e.stopPropagation();
+                }}
+            >
+                <span>{selectedClient ? selectedClient.name : "Select Client"}</span>
+                <div className="custom-select__arrow"></div>
+            </div>
 
-        <select
-            value={form.clientId}
-            onChange={(e) => setForm({...form, clientId: e.target.value})}
-            className="tasks-select-btn"
-        >
-            <option value="">Select client</option>
-            {clients.map((c) => (
-            <option key={c.id} value={c.id}>
-                {c.name}
-            </option>
-            ))}
-        </select>
-
-        <button className="task-input-btn" onClick={handleSubmit}>{editingTask ? "Save task" : "Add task"}</button>
+            {isOpen && (
+            <div className="custom-select__options">
+                <div 
+                    className="custom-select__option" 
+                    onClick={() => {
+                        setForm({...form, clientId: ""});
+                        setIsOpen(false);
+                    }}
+                >
+                    Select client (none) 
+                </div>
+                {clients.map((c) => (
+                <div 
+                    key={c.id} 
+                    className="custom-select__option"
+                    onClick={() => {
+                    setForm({...form, clientId: c.id});
+                    setIsOpen(false);
+                    }}
+                >
+                    {c.name}
+                </div>
+                ))}
+            </div>
+            )}
+        </div>
+        <button className="tasks-form__btn" onClick={handleSubmit}>{editingTask ? "Save task" : "Add task"}</button>
     </div>
   )
 }
 
-export default TaskForm
+export default TaskForm;

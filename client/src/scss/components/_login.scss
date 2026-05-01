@@ -1,0 +1,78 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+.login-page {
+  display: flex;
+  justify-content: center;
+  align-items: center;    
+  min-height: 100vh;     
+  padding: 20px;       
+  
+  &__container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 25px;
+    width: 100%;
+    max-width: 300px;
+    
+    @include tablet {
+      max-width: 500px;
+    }
+
+    @include desktop {
+      gap: 35px;
+    }
+  }
+
+  &__title {
+    font-size: 2rem; 
+    color: $white;
+    margin-bottom: 35px; 
+    
+    @include tablet {
+      margin-bottom: 40px;
+      font-size: 2.5rem;
+    }
+
+    @include desktop {
+      margin-bottom: 50px;
+      font-size: 3rem; 
+    }
+  }
+
+  &__button {
+    color: $white;
+    background: $btn-color;
+    width: 180px;
+    height: 60px;
+    font-size: 1.2rem; 
+    border-radius: 20px;
+    cursor: pointer;
+    border: 1px solid $white;
+    transition: all 0.5s ease-in-out;
+
+    @include tablet {
+      font-size: 1.4rem;
+      height: 70px;
+      width: 190px;
+    }
+
+    @include desktop {
+      font-size: 1.5rem;
+      width: 200px;
+      height: 80px;
+    }
+
+    &:hover {
+      color: $black;
+      background: $btn-hover-color;
+      transform: translateY(-3px); 
+    }
+
+    &:active {
+      transform: translateY(0); 
+    }
+  }
+}
+

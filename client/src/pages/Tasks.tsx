@@ -20,20 +20,7 @@ function Tasks() {
   useEffect(() => {
     getTasks().then(setTasks);
     getClients().then(setClients);
-  }, []);
-
-  useEffect(() => {
-    if (editingTask) {
-      setForm({
-        title: editingTask.title,
-        status: editingTask.status,
-        clientId:
-          typeof editingTask.clientId === 'string'
-            ? editingTask.clientId
-            : editingTask.clientId.id,
-      });
-    }
-  }, [editingTask]);    
+  }, []);   
 
   const handleSubmit = async() => {
     if (!form.title || !form.clientId) return;
@@ -66,11 +53,6 @@ function Tasks() {
 
   const filteredTask = filter === "all" ? tasks : tasks.filter((t) => t.status === filter);
 
-  // const getClientName = (clientId: string) => {
-  //   const client = clients.find((c) => c.id === clientId);
-  //   return client ? client.name : "Unknown client";
-  // };
-
   const handleChangeStatus = async(taskId: string, status: TaskStatus) : Promise<void> => {
     await updateTask(taskId, { status });
 
@@ -79,27 +61,41 @@ function Tasks() {
   };
 
   return (
-    <div>
+    <div className="tasks">
       <TaskForm form={form} setForm={setForm} clients={clients} handleSubmit={handleSubmit} editingTask={editingTask}/>
-      <div className="tasks-container">
+      <div className="tasks__container">
         <TaskItem setFilter={setFilter} filter={filter}/>
-        <div className="tasks-form-container">
+        <div className="tasks__form-container">
           
           {filteredTask.map((task) => (
-            <div key={task.id} className="task-item-container">
-              <p>{task.title}</p>
-              <p>Status: {task.status}</p>
-              <p>
+            <div key={task.id} className={`tasks__item-container tasks__item-container--${task.status}`}>
+              <p className="tasks__item-title">{task.title}</p>
+              <p className="tasks__item-text">Status: {task.status}</p>
+              <p className="tasks__item-text">
                 Client: {
                   typeof task.clientId === 'string'
                     ? "Unknown client"
                     : task.clientId.name
                 }
               </p>
-              <button className="task-item-btn" onClick={() => handleDeleteTask(task.id)}>Delete</button>
-              <button className="task-item-btn" onClick={() => setEditingTask(task)}>Edit</button>
-              <button onClick={() => handleChangeStatus(task.id, 'done')}>Done</button>
-              <button onClick={() => handleChangeStatus(task.id, 'in-progress')}>In Progress</button>
+              <button className="tasks__item-btn" onClick={() => {
+                  setEditingTask(task);
+                  setForm({
+                    title: task.title,
+                    status: task.status,
+                    clientId: typeof task.clientId === 'string' 
+                      ? task.clientId 
+                      : task.clientId.id,
+                  });
+                }}
+              >
+                Edit
+              </button>
+              <button className="tasks__item-btn del" onClick={() => handleDeleteTask(task.id)}>Delete</button>
+              <div className="tasks__btn-container">
+                <button className="tasks__item-status-btn done" onClick={() => handleChangeStatus(task.id, 'done')}>Done</button>
+                <button className="tasks__item-status-btn in-progress" onClick={() => handleChangeStatus(task.id, 'in-progress')}>In Progress</button>
+              </div>
             </div>
           ))}
         </div>

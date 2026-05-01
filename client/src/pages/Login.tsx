@@ -11,11 +11,12 @@ function Login() {
   }
 
   return (
-    <div className="login-container">
-      <h2 className="page-title">Please log in CRM</h2>
-      <button className="login-button" onClick={handleLogin}>Login</button>
+    <div className="login-page">
+      <div className="login-page__container">
+        <h2 className="login-page__title">Please log in CRM</h2>
+        <button className="login-page__button" onClick={handleLogin}>Login</button>
+      </div>
     </div>
-    
   )
 }
 
