@@ -60,7 +60,9 @@ export const getClients = async(req, res) => {
 
         return res.status(200).json(clients);
     } catch (e) {
-        res.status(400).json({ message: 'Failed to fetch clients' });
+        // res.status(400).json({ message: 'Failed to fetch clients' });
+        console.error("DETAILED ERROR:", error); 
+        res.status(400).json({ message: error.message });
     }
 };
 
