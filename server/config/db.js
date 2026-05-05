@@ -23,7 +23,6 @@ if (!URI) {
     );
 }
 
-// Кэшируем соединение в глобальной области видимости Node.js
 let cached = global.mongoose;
 
 if (!cached) {
@@ -37,7 +36,7 @@ async function connectDB() {
 
     if (!cached.promise) {
         const opts = {
-            bufferCommands: false, // Отключаем буферизацию, чтобы сразу видеть ошибки подключения
+            bufferCommands: false, 
         };
 
         cached.promise = mongoose.connect(URI, opts).then(mongooseInstance => {

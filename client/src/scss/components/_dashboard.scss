@@ -22,6 +22,34 @@
       grid-template-columns: repeat(2, 1fr); 
     }
   }
+
+  &__loading {
+    padding: 0 24px;
+  }
+
+  &__loading-title {
+    font-size: 1.2rem;
+
+    @include tablet {
+      font-size: 1.5rem; 
+    }
+
+    @include desktop {
+      font-size: 1.6rem; 
+    }
+  }
+
+  &__loading-text {
+    font-size: 1rem;
+
+    @include tablet {
+      font-size: 1.4rem; 
+    }
+
+    @include desktop {
+      font-size: 1.5rem; 
+    }
+  }
 }
 
 .dash-card {

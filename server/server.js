@@ -22,14 +22,13 @@
 
 import express from 'express';
 import cors from 'cors';
-import connectDB from './config/db.js'; // Обрати внимание, теперь мы импортируем функцию подключения
+import connectDB from './config/db.js'; 
 import taskRouter from './routes/taskRoutes.js';
 import clientRouter from './routes/clientRoutes.js';
 
 const app = express();
 const port = 5050;
 
-// Настройка CORS — разрешаем запросы с любого источника (или укажи свой фронтенд URL для безопасности)
 app.use(
     cors({
         origin: '*',
@@ -40,7 +39,6 @@ app.use(
 
 app.use(express.json());
 
-// Отключаем кэширование ответов от API намертво
 app.use((req, res, next) => {
     res.setHeader(
         'Cache-Control',
@@ -51,7 +49,6 @@ app.use((req, res, next) => {
     next();
 });
 
-// Middleware для автоматической проверки/подключения к базе данных перед каждым запросом
 app.use(async (req, res, next) => {
     try {
         await connectDB();
@@ -64,11 +61,9 @@ app.use(async (req, res, next) => {
     }
 });
 
-// Наши роуты
 app.use('/tasks', taskRouter);
 app.use('/clients', clientRouter);
 
-// Локальный запуск (Vercel в продакшене игнорирует app.listen и использует экспортированный app)
 if (process.env.NODE_ENV !== 'production') {
     app.listen(port, () => {
         console.log(`Server listening at http://localhost:${port}`);

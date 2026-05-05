@@ -7,7 +7,7 @@ import type { Task } from '../types/task';
 function Dashboard() {
     const [clients, setClients] = useState<Client[]>([]);
     const [tasks, setTasks] = useState<Task[]>([]);
-    const [loading, setLoading] = useState<boolean>(true); // Добавляем лоадер
+    const [loading, setLoading] = useState<boolean>(true);
 
     // useEffect(() => {
     //     getClients().then(setClients);
@@ -15,7 +15,6 @@ function Dashboard() {
     // }, []);
 
     useEffect(() => {
-        // Ждем выполнения обоих запросов
         Promise.all([getClients(), getTasks()])
             .then(([clientsData, tasksData]) => {
                 setClients(Array.isArray(clientsData) ? clientsData : []);
@@ -25,15 +24,15 @@ function Dashboard() {
                 console.error('Error fetching data:', err);
             })
             .finally(() => {
-                setLoading(false); // Выключаем лоадер в любом случае
+                setLoading(false); 
             });
     }, []);
 
     if (loading) {
         return (
             <div className="dash__loading">
-                <h2>Загрузка данных...</h2>
-                <p>Пробуждаем сервер базы данных, пожалуйста, подождите.</p>
+                <h2 className='dash__loading-title'>Loading data...</h2>
+                <p className='dash__loading-text'>Waking up the database server, please wait.</p>
             </div>
         );
     }
