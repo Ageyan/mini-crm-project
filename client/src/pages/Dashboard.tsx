@@ -24,15 +24,17 @@ function Dashboard() {
                 console.error('Error fetching data:', err);
             })
             .finally(() => {
-                setLoading(false); 
+                setLoading(false);
             });
     }, []);
 
     if (loading) {
         return (
             <div className="dash__loading">
-                <h2 className='dash__loading-title'>Loading data...</h2>
-                <p className='dash__loading-text'>Waking up the database server, please wait.</p>
+                <h2 className="dash__loading-title">Loading data...</h2>
+                <p className="dash__loading-text">
+                    Waking up the database server, please wait.
+                </p>
             </div>
         );
     }

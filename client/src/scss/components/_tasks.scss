@@ -2,420 +2,419 @@
 @use '../utils/mixins' as *;
 
 .tasks {
-  @include container;
-  padding-top: 10px;
-
-  @include tablet {
-    padding-top: 30px;
-  }
-
-  &__container {
-    display: flex;
-    width: 100%;
-    justify-content: center;
-    flex-direction: column;
-    gap: 20px;
+    @include container;
+    padding-top: 10px;
 
     @include tablet {
-      gap: 36px;
+        padding-top: 30px;
     }
 
-    @include desktop {
-      gap: 80px;
-      justify-content: space-between;
-      flex-direction: row;
-    }
-  }
+    &__container {
+        display: flex;
+        width: 100%;
+        justify-content: center;
+        flex-direction: column;
+        gap: 20px;
 
-  &__form-container {
-    flex-grow: 1;
-    border-radius: 20px;
-    border: 1px solid $btn-color;
-    background: $bg-gradient-dark;
-    padding: 20px 8px;
-    gap: 26px;
-    display: grid;
-    grid-template-columns: 1fr; 
+        @include tablet {
+            gap: 36px;
+        }
 
-    @include tablet {
-      padding: 28px 18px;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 28px;
+        @include desktop {
+            gap: 80px;
+            justify-content: space-between;
+            flex-direction: row;
+        }
     }
 
-    @include desktop {
-      padding: 36px 22px;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 30px;
-    }
-  }
+    &__form-container {
+        flex-grow: 1;
+        border-radius: 20px;
+        border: 1px solid $btn-color;
+        background: $bg-gradient-dark;
+        padding: 20px 8px;
+        gap: 26px;
+        display: grid;
+        grid-template-columns: 1fr;
 
-  &__item-container {
-    border-radius: 20px;
-    background: $bg-gradient-main;
-    padding: 12px 6px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    transition: transform 0.5s;
-    margin: 0 auto;
-    border-left: 4px solid $todo;
+        @include tablet {
+            padding: 28px 18px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 28px;
+        }
 
-    @include tablet {
-      gap: 12px;
-      padding: 18px 38px;
-      border-left: 8px solid $todo;
-    }
-
-    @include desktop {
-      padding: 22px 46px;
-      gap: 14px;
-
-      &:hover {
-        transform: scale(1.1);
-      }
+        @include desktop {
+            padding: 36px 22px;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
     }
 
-    &--done {
-      border-left: 4px solid $done;
+    &__item-container {
+        border-radius: 20px;
+        background: $bg-gradient-main;
+        padding: 12px 6px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+        transition: transform 0.5s;
+        margin: 0 auto;
+        border-left: 4px solid $todo;
 
-      @include tablet {
-        border-left: 8px solid $done;
-      }
+        @include tablet {
+            gap: 12px;
+            padding: 18px 38px;
+            border-left: 8px solid $todo;
+        }
+
+        @include desktop {
+            padding: 22px 46px;
+            gap: 14px;
+
+            &:hover {
+                transform: scale(1.1);
+            }
+        }
+
+        &--done {
+            border-left: 4px solid $done;
+
+            @include tablet {
+                border-left: 8px solid $done;
+            }
+        }
+
+        &--in-progress {
+            border-left: 4px solid $in-progress;
+
+            @include tablet {
+                border-left: 8px solid $in-progress;
+            }
+        }
     }
 
-    &--in-progress {
-      border-left: 4px solid $in-progress;
+    &__item-title {
+        font-size: 1.2rem;
 
-      @include tablet {
-        border-left: 8px solid $in-progress;
-      }
-    }
-  }
-
-  &__item-title {
-    font-size: 1.2rem;
-
-    @include tablet {
-      font-size: 1.3rem;
-    }
-  }
-
-  &__item-text {
-    font-size: 1rem;
-
-    @include tablet {
-      font-size: 1.1rem;
-    }
-  }
-
-  &__item-btn {
-    color: $white;
-    background: $black;
-    padding: 4px 10px;
-    margin: 0 auto;
-    max-width: 240px;
-    width: 100%;
-    height: 46px;
-    font-size: 1rem;
-    border-radius: 16px;
-    cursor: pointer;
-    font-weight: 400;
-    border: 1px solid $color-dark-gray;
-    transition: all 0.5s ease-in-out;
-
-    &:hover {
-      background: $color-accent-gray;
-      color: $black;
+        @include tablet {
+            font-size: 1.3rem;
+        }
     }
 
-    &.del:hover {
-      background: $delete;
-      color: $black;
-    }
-  }
+    &__item-text {
+        font-size: 1rem;
 
-  &__btn-container {
-    display: flex;
-    justify-content: space-between;
-    gap: 6px;
-  }
-
-  &__item-status-btn {
-    flex-grow: 1;
-    padding: 4px 6px;
-    border-radius: 16px;
-    font-size: 0.8rem;
-    width: 110px;
-    height: 36px;
-    color: $white;
-    cursor: pointer;
-    font-weight: 400;
-    background: $black;
-    border: 1px solid $color-dark-gray;
-    transition: all 0.5s ease-in-out;
-
-    &.done:hover {
-      background: $done;
-      color: $black;
+        @include tablet {
+            font-size: 1.1rem;
+        }
     }
 
-    &.in-progress:hover {
-      background: $in-progress;
-      color: $black;
+    &__item-btn {
+        color: $white;
+        background: $black;
+        padding: 4px 10px;
+        margin: 0 auto;
+        max-width: 240px;
+        width: 100%;
+        height: 46px;
+        font-size: 1rem;
+        border-radius: 16px;
+        cursor: pointer;
+        font-weight: 400;
+        border: 1px solid $color-dark-gray;
+        transition: all 0.5s ease-in-out;
+
+        &:hover {
+            background: $color-accent-gray;
+            color: $black;
+        }
+
+        &.del:hover {
+            background: $delete;
+            color: $black;
+        }
     }
-  }
+
+    &__btn-container {
+        display: flex;
+        justify-content: space-between;
+        gap: 6px;
+    }
+
+    &__item-status-btn {
+        flex-grow: 1;
+        padding: 4px 6px;
+        border-radius: 16px;
+        font-size: 0.8rem;
+        width: 110px;
+        height: 36px;
+        color: $white;
+        cursor: pointer;
+        font-weight: 400;
+        background: $black;
+        border: 1px solid $color-dark-gray;
+        transition: all 0.5s ease-in-out;
+
+        &.done:hover {
+            background: $done;
+            color: $black;
+        }
+
+        &.in-progress:hover {
+            background: $in-progress;
+            color: $black;
+        }
+    }
 }
 
 .tasks-form {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 20px;
-  width: 100%;
-
-  @include tablet {
-    gap: 20px;
-    margin-bottom: 30px;
-  }
-
-  @include desktop {
-    flex-direction: row;
-    justify-content: space-around;
-    margin-bottom: 60px;
-  }
-
-  &__input {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 20px;
     width: 100%;
-    max-width: 400px;
-    font-size: 1rem;
-    font-weight: 400;
-    background: $white;
-    color: $black;
-    border-radius: 20px;
-    padding: 6px 14px;
 
     @include tablet {
-      font-size: 1.1rem;
-      padding: 10px 16px;
-      max-width: 500px;
+        gap: 20px;
+        margin-bottom: 30px;
     }
 
     @include desktop {
-      padding: 12px 20px;
-      max-width: 600px;
-    }
-  }
-
-  &__btn { 
-    color: $white;
-    background: $btn-color;
-    width: 160px;
-    height: 50px;
-    font-size: 1.1rem;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 400;
-    border: 1px solid $white;
-    transition: all 0.5s ease-in-out;
-
-    @include tablet {
-      height: 60px;
+        flex-direction: row;
+        justify-content: space-around;
+        margin-bottom: 60px;
     }
 
-    @include desktop {
-      width: 180px;
-      height: 70px;
-      font-size: 1.2rem;
+    &__input {
+        width: 100%;
+        max-width: 400px;
+        font-size: 1rem;
+        font-weight: 400;
+        background: $white;
+        color: $black;
+        border-radius: 20px;
+        padding: 6px 14px;
+
+        @include tablet {
+            font-size: 1.1rem;
+            padding: 10px 16px;
+            max-width: 500px;
+        }
+
+        @include desktop {
+            padding: 12px 20px;
+            max-width: 600px;
+        }
     }
 
-    &:hover {
-      color: $black;
-      background: $btn-hover-color;
-      transform: translateY(-3px);
-    }
+    &__btn {
+        color: $white;
+        background: $btn-color;
+        width: 160px;
+        height: 50px;
+        font-size: 1.1rem;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 400;
+        border: 1px solid $white;
+        transition: all 0.5s ease-in-out;
 
-    &:active {
-      transform: translateY(0px);
+        @include tablet {
+            height: 60px;
+        }
+
+        @include desktop {
+            width: 180px;
+            height: 70px;
+            font-size: 1.2rem;
+        }
+
+        &:hover {
+            color: $black;
+            background: $btn-hover-color;
+            transform: translateY(-3px);
+        }
+
+        &:active {
+            transform: translateY(0px);
+        }
     }
-  }
 }
 
 .custom-select {
-  position: relative;
-  width: 200px; 
-  user-select: none;
-
-  @include tablet {
-    width: 230px;
-  }
-
-  @include desktop {
-    width: 250px;
-  }
-
-  &__trigger {
-    background: $white;
-    color: $black;
-    padding: 6px 14px;
-    border-radius: 20px;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    font-size: 1rem;
-    border: 1px solid transparent;
-    transition: all 0.3s ease;
+    position: relative;
+    width: 200px;
+    user-select: none;
 
     @include tablet {
-      width: 230px;
-      padding: 10px 16px;
-      font-size: 1.1rem;
+        width: 230px;
     }
 
     @include desktop {
-      padding: 12px 20px;
+        width: 250px;
     }
 
-    &:hover {
-      border-color: $btn-hover-color;
-    }
-  }
+    &__trigger {
+        background: $white;
+        color: $black;
+        padding: 6px 14px;
+        border-radius: 20px;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        font-size: 1rem;
+        border: 1px solid transparent;
+        transition: all 0.3s ease;
 
-  &__options {
-    position: absolute;
-    top: calc(100% + 10px);
-    left: 0;
-    right: 0;
-    background: $bg-gradient-dark;
-    border: 1px solid $btn-color;
-    border-radius: 15px;
-    overflow: hidden;
-    z-index: 100;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  }
+        @include tablet {
+            width: 230px;
+            padding: 10px 16px;
+            font-size: 1.1rem;
+        }
 
-  &__option {
-    padding: 6px 14px;
-    font-size: 1rem;
-    color: $white;
-    cursor: pointer;
-    transition: background 0.3s;
+        @include desktop {
+            padding: 12px 20px;
+        }
 
-    @include tablet {
-      padding: 8px 16px;
-      font-size: 1.1rem;
+        &:hover {
+            border-color: $btn-hover-color;
+        }
     }
 
-    &:hover {
-      background: rgba($btn-hover-color, 0.2);
-      color: $btn-hover-color;
+    &__options {
+        position: absolute;
+        top: calc(100% + 10px);
+        left: 0;
+        right: 0;
+        background: $bg-gradient-dark;
+        border: 1px solid $btn-color;
+        border-radius: 15px;
+        overflow: hidden;
+        z-index: 100;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
     }
-  }
 
-  &__arrow {
-    width: 10px;
-    height: 10px;
-    border-right: 2px solid $black;
-    border-bottom: 2px solid $black;
-    transform: rotate(45deg);
-    transition: transform 0.3s;
-    margin-bottom: 4px;
+    &__option {
+        padding: 6px 14px;
+        font-size: 1rem;
+        color: $white;
+        cursor: pointer;
+        transition: background 0.3s;
 
-    .open & {
-      transform: rotate(-135deg);
-      margin-bottom: -4px;
+        @include tablet {
+            padding: 8px 16px;
+            font-size: 1.1rem;
+        }
+
+        &:hover {
+            background: rgba($btn-hover-color, 0.2);
+            color: $btn-hover-color;
+        }
     }
-  }
+
+    &__arrow {
+        width: 10px;
+        height: 10px;
+        border-right: 2px solid $black;
+        border-bottom: 2px solid $black;
+        transform: rotate(45deg);
+        transition: transform 0.3s;
+        margin-bottom: 4px;
+
+        .open & {
+            transform: rotate(-135deg);
+            margin-bottom: -4px;
+        }
+    }
 }
 
 .tasks-filter {
-  display: flex;
-  width: 100%;
-  max-width: 260px;
-  margin: 0 auto;
-  flex-direction: column; 
-  padding: 10px 8px;
-  gap: 8px;
-  border: 1px solid $btn-color;
-  border-radius: 20px;
-  background: $bg-gradient-dark;
-
-  @include tablet {
-    max-width: 320px;
-    padding: 14px 12px;
-    gap: 16px;
-  }
-
-  @include desktop {
-    margin: 0;
-    width: auto;
-    min-width: 177px;
-    max-height: 360px;
-    padding: 20px 18px;
-    gap: 30px;
-  }
-
-  &__title {
-    font-size: 1.1rem;
-
-    @include tablet {
-      font-size: 1.2rem;
-    }
-
-    @include desktop {
-      font-size: 1.3rem;
-    }
-  }
-
-  &__btn {
-    color: $color-accent-gray;
-    background: $btn-color;
+    display: flex;
     width: 100%;
-    max-width: 200px;
-    height: 38px;
-    padding: 4px 6px;
-    font-size: 0.9rem;
-    border-radius: 20px;
-    cursor: pointer;
-    font-weight: 400;
-    border: 1px solid $white;
+    max-width: 260px;
     margin: 0 auto;
-    transition: all 0.5s ease-in-out;
+    flex-direction: column;
+    padding: 10px 8px;
+    gap: 8px;
+    border: 1px solid $btn-color;
+    border-radius: 20px;
+    background: $bg-gradient-dark;
 
     @include tablet {
-      font-size: 1rem;
-      padding: 6px 10px;
-      height: 45px;
+        max-width: 320px;
+        padding: 14px 12px;
+        gap: 16px;
     }
 
     @include desktop {
-      
-    }
-    
-    &.done {
-      border: 2px solid $done;
-    }
-
-    &.todo {
-      border: 2px solid $todo;
+        margin: 0;
+        width: auto;
+        min-width: 177px;
+        max-height: 360px;
+        padding: 20px 18px;
+        gap: 30px;
     }
 
-    &.in-progress {
-      border: 2px solid $in-progress;
+    &__title {
+        font-size: 1.1rem;
+
+        @include tablet {
+            font-size: 1.2rem;
+        }
+
+        @include desktop {
+            font-size: 1.3rem;
+        }
     }
 
-    &:hover {
-      color: $white;
-      background: $btn-hover-color;
-      transform: translateY(-3px);
-    }
+    &__btn {
+        color: $color-accent-gray;
+        background: $btn-color;
+        width: 100%;
+        max-width: 200px;
+        height: 38px;
+        padding: 4px 6px;
+        font-size: 0.9rem;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 400;
+        border: 1px solid $white;
+        margin: 0 auto;
+        transition: all 0.5s ease-in-out;
 
-    &.active {
-      color: $white;
-      background: $btn-hover-color;
+        @include tablet {
+            font-size: 1rem;
+            padding: 6px 10px;
+            height: 45px;
+        }
+
+        @include desktop {
+        }
+
+        &.done {
+            border: 2px solid $done;
+        }
+
+        &.todo {
+            border: 2px solid $todo;
+        }
+
+        &.in-progress {
+            border: 2px solid $in-progress;
+        }
+
+        &:hover {
+            color: $white;
+            background: $btn-hover-color;
+            transform: translateY(-3px);
+        }
+
+        &.active {
+            color: $white;
+            background: $btn-hover-color;
+        }
     }
-  }
 }
