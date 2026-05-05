@@ -1,35 +1,34 @@
-import Client from "../models/Client.js";
+import Client from '../models/Client.js';
 
-export const createClient = async(req, res) => {
+export const createClient = async (req, res) => {
     try {
         const { name, email, phone } = req.body;
 
         const clientObj = {
-            name, 
+            name,
             email,
-            phone
-        }
+            phone,
+        };
 
         const client = await Client.create(clientObj);
 
-        return res.status(201).json(client)
+        return res.status(201).json(client);
     } catch (e) {
-        res.status(400).json({message: 'Failed to create the client'})
+        res.status(400).json({ message: 'Failed to create the client' });
     }
 };
 
-export const updateClient = async(req, res) => {
+export const updateClient = async (req, res) => {
     try {
         const clientId = req.params.id;
 
-        const client = await Client.findByIdAndUpdate(
-            clientId,
-            req.body,
-            { returnDocument: 'after', runValidators: true }
-        );
+        const client = await Client.findByIdAndUpdate(clientId, req.body, {
+            returnDocument: 'after',
+            runValidators: true,
+        });
 
-        if(!client) {
-            return res.status(404).json({message: 'Client not found'});
+        if (!client) {
+            return res.status(404).json({ message: 'Client not found' });
         }
 
         return res.status(200).json(client);
@@ -38,23 +37,23 @@ export const updateClient = async(req, res) => {
     }
 };
 
-export const deleteClient = async(req, res) => {
+export const deleteClient = async (req, res) => {
     try {
         const clientId = req.params.id;
 
         const client = await Client.findByIdAndDelete(clientId);
 
-        if(!client) {
-            return res.status(404).json({message: 'Client not found'});
+        if (!client) {
+            return res.status(404).json({ message: 'Client not found' });
         }
 
-        return res.status(200).json({message: 'Client deleted successfully'})
+        return res.status(200).json({ message: 'Client deleted successfully' });
     } catch (e) {
         res.status(400).json({ message: 'Failed to delete the client' });
     }
 };
 
-export const getClients = async(req, res) => {
+export const getClients = async (req, res) => {
     try {
         const clients = await Client.find();
 
@@ -64,17 +63,17 @@ export const getClients = async(req, res) => {
     }
 };
 
-export const getClient = async(req, res) => {
+export const getClient = async (req, res) => {
     try {
         const clientId = req.params.id;
 
-        const client = await Client.findById(clientId)
+        const client = await Client.findById(clientId);
 
         if (!client) {
             return res.status(404).json({ message: 'Client not found' });
         }
 
-        return res.status(200).json(client)
+        return res.status(200).json(client);
     } catch (e) {
         res.status(400).json({ message: 'Failed to fetch client' });
     }
