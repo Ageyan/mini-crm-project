@@ -92,7 +92,7 @@ function Tasks() {
                             </p>
                             <p className="tasks__item-text">
                                 Client:{' '}
-                                {typeof task.clientId === 'string'
+                                {typeof task.clientId === 'string' || !task.clientId
                                     ? 'Unknown client'
                                     : task.clientId.name}
                             </p>
@@ -106,7 +106,7 @@ function Tasks() {
                                         clientId:
                                             typeof task.clientId === 'string'
                                                 ? task.clientId
-                                                : task.clientId.id,
+                                                : task.clientId?.id || '',
                                     });
                                 }}
                             >
