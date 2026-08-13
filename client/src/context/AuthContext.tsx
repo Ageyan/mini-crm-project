@@ -1,7 +1,6 @@
-import { createContext, useContext, useEffect, useState } from 'react';
+import { createContext, useContext } from 'react';
 
 type AuthContexType = {
-    isAuth: boolean;
     login: () => void;
     logout: () => void;
 };
@@ -9,27 +8,16 @@ type AuthContexType = {
 const AuthContext = createContext<AuthContexType | null>(null);
 
 export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
-    const [isAuth, setIsAuth] = useState(false);
-
-    useEffect(() => {
-        const savedAuth = localStorage.getItem('isAuth');
-        if (savedAuth === 'true') {
-            setIsAuth(true);
-        }
-    }, []);
-
     const login = () => {
-        localStorage.setItem('isAuth', 'true');
-        setIsAuth(true);
+        localStorage.getItem('token');
     };
 
     const logout = () => {
-        localStorage.removeItem('isAuth');
-        setIsAuth(false);
+        localStorage.removeItem('token');
     };
 
     return (
-        <AuthContext.Provider value={{ isAuth, login, logout }}>
+        <AuthContext.Provider value={{ login, logout }}>
             {children}
         </AuthContext.Provider>
     );

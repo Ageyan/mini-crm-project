@@ -9,11 +9,6 @@ function Dashboard() {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [loading, setLoading] = useState<boolean>(true);
 
-    // useEffect(() => {
-    //     getClients().then(setClients);
-    //     getTasks().then(setTasks);
-    // }, []);
-
     useEffect(() => {
         Promise.all([getClients(), getTasks()])
             .then(([clientsData, tasksData]) => {

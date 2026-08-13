@@ -4,8 +4,9 @@
 @use './base/reset';
 @use './base/typography';
 
-@use './layouts/main-layout';
+@use './components/header';
 @use './components/login';
 @use './components/dashboard';
 @use './components/clients';
 @use './components/tasks';
+@use './components/toast';

@@ -252,10 +252,6 @@
         width: 230px;
     }
 
-    @include desktop {
-        width: 250px;
-    }
-
     &__trigger {
         background: $white;
         color: $black;
@@ -294,7 +290,14 @@
         border-radius: 15px;
         overflow: hidden;
         z-index: 100;
+        overflow-y: auto;
+        max-height: 240px;
         box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+        scrollbar-width: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
     }
 
     &__option {

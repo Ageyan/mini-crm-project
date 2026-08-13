@@ -10,13 +10,7 @@ type TaskFormProps = {
     clients: Client[];
 };
 
-function TaskForm({
-    form,
-    setForm,
-    clients,
-    handleSubmit,
-    editingTask,
-}: TaskFormProps) {
+function TaskForm({form, setForm, clients, handleSubmit, editingTask}: TaskFormProps) {
     const [isOpen, setIsOpen] = useState(false);
 
     const selectedClient = clients.find(c => c.id === form.clientId);
