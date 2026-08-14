@@ -1,57 +1,6 @@
 @use '../utils/variables' as *;
 @use '../utils/mixins' as *;
 
-.dash {
-    @include container;
-    padding-top: 30px;
-
-    @include tablet {
-        padding-top: 70px;
-    }
-
-    @include desktop {
-        padding-top: 90px;
-    }
-
-    &__grid {
-        display: grid;
-        gap: 20px;
-        grid-template-columns: 1fr;
-
-        @include tablet {
-            grid-template-columns: repeat(2, 1fr);
-        }
-    }
-
-    &__loading {
-        padding: 0 24px;
-    }
-
-    &__loading-title {
-        font-size: 1.2rem;
-
-        @include tablet {
-            font-size: 1.5rem;
-        }
-
-        @include desktop {
-            font-size: 1.6rem;
-        }
-    }
-
-    &__loading-text {
-        font-size: 1rem;
-
-        @include tablet {
-            font-size: 1.4rem;
-        }
-
-        @include desktop {
-            font-size: 1.5rem;
-        }
-    }
-}
-
 .dash-card {
     background: $bg-gradient-dark;
     border: 1px solid rgba($white, 0.1);
@@ -107,10 +56,5 @@
         height: 100%;
         background: $btn-hover-color;
         transition: width 1s ease-out;
-    }
-
-    &--accent {
-        background: $bg-gradient-dark;
-        border: 1px solid rgba($btn-hover-color, 0.3);
     }
 }

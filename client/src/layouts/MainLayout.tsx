@@ -3,9 +3,9 @@ import Header from '../components/Header';
 
 function MainLayout() {
     return (
-        <div>
+        <div className="app-container">
             <Header />
-            <main>
+            <main className="main-container">
                 <Outlet />
             </main>
         </div>

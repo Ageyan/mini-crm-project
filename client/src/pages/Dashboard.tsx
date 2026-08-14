@@ -3,6 +3,7 @@ import { getClients } from '../services/clientService';
 import { getTasks } from '../services/taskService';
 import type { Client } from '../types/clients';
 import type { Task } from '../types/task';
+import DashCard from '../components/DashCard';
 
 function Dashboard() {
     const [clients, setClients] = useState<Client[]>([]);
@@ -36,11 +37,22 @@ function Dashboard() {
 
     const activeTasksCount = tasks.filter(t => t.status !== 'done').length;
     const doneTasksCount = tasks.filter(t => t.status === 'done').length;
+    const todoTasksCount = tasks.filter(t => t.status === 'todo').length;
+    const inProgressCount = tasks.filter(
+        t => t.status === 'in-progress',
+    ).length;
     const completionRateTasks =
         tasks.length > 0
             ? Math.round((doneTasksCount / tasks.length) * 100)
             : 0;
-
+    const todoRateTasks =
+        tasks.length > 0
+            ? Math.round((todoTasksCount / tasks.length) * 100)
+            : 0;
+    const progressRateTasks =
+        tasks.length > 0
+            ? Math.round((inProgressCount / tasks.length) * 100)
+            : 0;
     const activeClientsCount = clients.filter(
         c => c.status === 'active',
     ).length;
@@ -49,62 +61,61 @@ function Dashboard() {
             ? Math.round((activeClientsCount / clients.length) * 100)
             : 0;
 
+    const cardsData = [
+        {
+            id: 1,
+            label: 'Clients',
+            value: clients.length,
+            desc: 'Total registered',
+        },
+        {
+            id: 2,
+            label: 'Tasks',
+            value: activeTasksCount,
+            desc: 'Active currently',
+        },
+        {
+            id: 3,
+            label: 'Client Retention',
+            value: completionRateClients,
+            progress: completionRateClients, // Передаем progress!
+            desc: `Active clients : ${activeClientsCount}/${clients.length}`,
+        },
+        {
+            id: 4,
+            label: 'Task Completion',
+            value: completionRateTasks,
+            progress: completionRateTasks, // Передаем progress!
+            desc: `Tasks completed : ${doneTasksCount}/${tasks.length}`,
+        },
+        {
+            id: 5,
+            label: 'Pending Tasks',
+            value: todoRateTasks,
+            progress: todoRateTasks, // Передаем progress!
+            desc: `Tasks todo : ${todoTasksCount}/${tasks.length}`,
+        },
+        {
+            id: 6,
+            label: 'Current Workload',
+            value: progressRateTasks,
+            progress: progressRateTasks, // Передаем progress!
+            desc: `Tasks in-progress : ${inProgressCount}/${tasks.length}`,
+        },
+    ];
+
     return (
-        <div className="dash">
-            <div className="dash__grid">
-                <div className="dash-card">
-                    <h3 className="dash-card__label">Clients</h3>
-                    <div className="dash-card__content">
-                        <span className="dash-card__number">
-                            {clients.length}
-                        </span>
-                        <p className="dash-card__desc">Total registered</p>
-                    </div>
-                </div>
-                <div className="dash-card">
-                    <h3 className="dash-card__label">Tasks</h3>
-                    <div className="dash-card__content">
-                        <span className="dash-card__number">
-                            {activeTasksCount}
-                        </span>
-                        <p className="dash-card__desc">Active currently</p>
-                    </div>
-                </div>
-                <div className="dash-card dash-card--accent">
-                    <h3 className="dash-card__label">Efficiency Clients</h3>
-                    <div className="dash-card__content">
-                        <span className="dash-card__number">
-                            {completionRateClients}%
-                        </span>
-                        <div className="dash-card__progress-bar">
-                            <div
-                                className="dash-card__progress-fill"
-                                style={{ width: `${completionRateClients}%` }}
-                            ></div>
-                        </div>
-                        <p className="dash-card__desc">
-                            Active clients : {activeClientsCount}/
-                            {clients.length}
-                        </p>
-                    </div>
-                </div>
-                <div className="dash-card dash-card--accent">
-                    <h3 className="dash-card__label">Efficiency Tasks</h3>
-                    <div className="dash-card__content">
-                        <span className="dash-card__number">
-                            {completionRateTasks}%
-                        </span>
-                        <div className="dash-card__progress-bar">
-                            <div
-                                className="dash-card__progress-fill"
-                                style={{ width: `${completionRateTasks}%` }}
-                            ></div>
-                        </div>
-                        <p className="dash-card__desc">
-                            Tasks completed : {doneTasksCount}/{tasks.length}
-                        </p>
-                    </div>
-                </div>
+        <div className="dashboard">
+            <div className="dashboard__grid">
+                {cardsData.map(card => (
+                    <DashCard
+                        key={card.id}
+                        label={card.label}
+                        value={card.value}
+                        progress={card.progress}
+                        desc={card.desc}
+                    />
+                ))}
             </div>
         </div>
     );

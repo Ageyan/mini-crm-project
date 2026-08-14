@@ -16,5 +16,9 @@
     width: 100%;
     max-width: $container-width;
     margin: 0 auto;
-    padding: $container-padding;
+    padding: $mobile-container-padding;
+
+    @include tablet {
+        padding: $container-padding;
+    }
 }
