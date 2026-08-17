@@ -1,8 +1,9 @@
 import api from './api';
 import type { Task, NewTask } from '../types/task';
+import type { AxiosRequestConfig } from 'axios';
 
-export const getTasks = async (): Promise<Task[]> => {
-    const { data } = await api.get<Task[]>('/tasks');
+export const getTasks = async (config? : AxiosRequestConfig): Promise<Task[]> => {
+    const { data } = await api.get<Task[]>('/tasks', config);
     return data;
 };
 

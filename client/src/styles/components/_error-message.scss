@@ -2,9 +2,11 @@
 
 .error-message {
     display: flex;
+    padding: 12px;
+    border-radius: 20px;
     align-items: center;
     justify-content: center;
-    background-color: $color-accent-gray;
+    background: $bg-gradient-main;
     color: $white;
     font-size: 1.3rem;
 }
