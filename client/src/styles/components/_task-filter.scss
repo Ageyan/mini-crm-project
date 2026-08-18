@@ -1,0 +1,90 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+.tasks-filter {
+    display: flex;
+    width: 100%;
+    max-width: 260px;
+    margin: 0 auto;
+    flex-direction: column;
+    padding: 10px 8px;
+    gap: 8px;
+    border: 1px solid $btn-color;
+    border-radius: 20px;
+    background: $bg-gradient-dark;
+
+    @include tablet {
+        max-width: 320px;
+        padding: 14px 12px;
+        gap: 16px;
+    }
+
+    @include desktop {
+        margin: 0;
+        width: auto;
+        min-width: 177px;
+        max-height: 360px;
+        padding: 20px 18px;
+        gap: 30px;
+    }
+
+    &__title {
+        font-size: 1.1rem;
+
+        @include tablet {
+            font-size: 1.2rem;
+        }
+
+        @include desktop {
+            font-size: 1.3rem;
+        }
+    }
+
+    &__btn {
+        color: $color-accent-gray;
+        background: $btn-color;
+        width: 100%;
+        max-width: 200px;
+        height: 38px;
+        padding: 4px 6px;
+        font-size: 0.9rem;
+        border-radius: 20px;
+        cursor: pointer;
+        font-weight: 400;
+        border: 1px solid $white;
+        margin: 0 auto;
+        transition: all 0.5s ease-in-out;
+
+        @include tablet {
+            font-size: 1rem;
+            padding: 6px 10px;
+            height: 45px;
+        }
+
+        @include desktop {
+        }
+
+        &.done {
+            border: 2px solid $done;
+        }
+
+        &.todo {
+            border: 2px solid $todo;
+        }
+
+        &.in-progress {
+            border: 2px solid $in-progress;
+        }
+
+        &:hover {
+            color: $white;
+            background: $btn-hover-color;
+            transform: translateY(-3px);
+        }
+
+        &.active {
+            color: $white;
+            background: $btn-hover-color;
+        }
+    }
+}

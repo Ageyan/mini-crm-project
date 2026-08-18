@@ -1,14 +1,14 @@
 import type { TaskStatus } from '../types/task';
 
-type TaskFilter = 'all' | TaskStatus;
+type TasksFilter = 'all' | TaskStatus;
 
-type TaskItemProps = {
-    setFilter: (value: TaskFilter) => void;
-    filter: TaskFilter;
+type TaskFilterProps = {
+    setFilter: (value: TasksFilter) => void;
+    filter: TasksFilter;
 };
 
-function TaskItem({ setFilter, filter }: TaskItemProps) {
-    const getClass = (value: TaskFilter) =>
+function TaskFilter({ setFilter, filter }: TaskFilterProps) {
+    const getClass = (value: TasksFilter) =>
         filter == value
             ? `tasks-filter__btn ${value} active`
             : `tasks-filter__btn ${value}`;
@@ -44,4 +44,4 @@ function TaskItem({ setFilter, filter }: TaskItemProps) {
     );
 }
 
-export default TaskItem;
+export default TaskFilter;

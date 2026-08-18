@@ -14,5 +14,9 @@
 @use './components/layout';
 @use './components/loader';
 @use './components/login';
+@use './components/task-card';
+@use './components/task-custom-select';
+@use './components/task-filter';
+@use './components/task-form';
 @use './components/tasks';
 @use './components/toast';

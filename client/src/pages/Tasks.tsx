@@ -1,13 +1,9 @@
 import { useState } from 'react';
 import type { Task, NewTask, TaskStatus } from '../types/task';
-import {
-    getTasks,
-    addTask,
-    deleteTask,
-    updateTask,
-} from '../services/taskService';
+import { addTask, deleteTask, updateTask } from '../services/taskService';
 import TaskForm from '../components/TaskForm';
-import TaskItem from '../components/TaskItem';
+import TaskFilter from '../components/TaskFilter';
+import TaskCard from '../components/TaskCard';
 import Loader from '../components/Loader';
 import { useCRMData } from '../hooks/useCRMData';
 
@@ -21,21 +17,21 @@ function Tasks() {
     });
     const [editingTask, setEditingTask] = useState<Task | null>(null);
 
-    const handleSubmit = async () => {
+    const handleSubmit = async (event: React.SubmitEvent) => {
+        event.preventDefault();
+
         if (!form.title || !form.clientId) return;
 
         if (editingTask) {
-            await updateTask(editingTask.id, form);
-
-            const updatedTasks = await getTasks();
-            setTasks(updatedTasks);
+            const update = await updateTask(editingTask.id, form);
+            setTasks(prev =>
+                prev.map(task => (task.id === editingTask.id ? update : task)),
+            );
 
             setEditingTask(null);
         } else {
-            await addTask(form);
-
-            const updatedTasks = await getTasks();
-            setTasks(updatedTasks);
+            const newTask = await addTask(form);
+            setTasks(prev => [...prev, newTask]);
         }
 
         setForm({
@@ -57,10 +53,13 @@ function Tasks() {
         taskId: string,
         status: TaskStatus,
     ): Promise<void> => {
-        await updateTask(taskId, { status });
+        const update = await updateTask(taskId, { status });
 
-        const updatedTasks = await getTasks();
-        setTasks(updatedTasks);
+        setTasks(prev =>
+            prev.map(task =>
+                task.id === taskId ? { ...task, status: update.status } : task,
+            ),
+        );
     };
 
     return (
@@ -76,71 +75,17 @@ function Tasks() {
             {loader && <Loader />}
             {!error && !loader && (
                 <div className="tasks__container">
-                    <TaskItem setFilter={setFilter} filter={filter} />
+                    <TaskFilter setFilter={setFilter} filter={filter} />
                     <div className="tasks__grid-container">
                         {filteredTask.map(task => (
-                            <div
+                            <TaskCard
                                 key={task.id}
-                                className={`tasks__item-container tasks__item-container--${task.status}`}
-                            >
-                                <p className="tasks__item-title">
-                                    {task.title}
-                                </p>
-                                <p className="tasks__item-text">
-                                    Status: {task.status}
-                                </p>
-                                <p className="tasks__item-text">
-                                    Client:{' '}
-                                    {typeof task.clientId === 'string' ||
-                                    !task.clientId
-                                        ? 'Unknown client'
-                                        : task.clientId.name}
-                                </p>
-                                <button
-                                    className="tasks__item-btn"
-                                    onClick={() => {
-                                        setEditingTask(task);
-                                        setForm({
-                                            title: task.title,
-                                            status: task.status,
-                                            clientId:
-                                                typeof task.clientId ===
-                                                'string'
-                                                    ? task.clientId
-                                                    : task.clientId?.id || '',
-                                        });
-                                    }}
-                                >
-                                    Edit
-                                </button>
-                                <button
-                                    className="tasks__item-btn del"
-                                    onClick={() => handleDeleteTask(task.id)}
-                                >
-                                    Delete
-                                </button>
-                                <div className="tasks__btn-container">
-                                    <button
-                                        className="tasks__item-status-btn done"
-                                        onClick={() =>
-                                            handleChangeStatus(task.id, 'done')
-                                        }
-                                    >
-                                        Done
-                                    </button>
-                                    <button
-                                        className="tasks__item-status-btn in-progress"
-                                        onClick={() =>
-                                            handleChangeStatus(
-                                                task.id,
-                                                'in-progress',
-                                            )
-                                        }
-                                    >
-                                        In Progress
-                                    </button>
-                                </div>
-                            </div>
+                                task={task}
+                                setForm={setForm}
+                                setEditingTask={setEditingTask}
+                                handleDeleteTask={handleDeleteTask}
+                                handleChangeStatus={handleChangeStatus}
+                            />
                         ))}
                     </div>
                 </div>
