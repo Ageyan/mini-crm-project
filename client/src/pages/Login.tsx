@@ -22,6 +22,36 @@ function Login() {
 
     const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
+
+        if (!email.trim() || !password.trim()) {
+            setToast({
+                show: true,
+                message: 'Please fill in all fields',
+                type: 'error',
+            });
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(email)) {
+            setToast({
+                show: true,
+                message:
+                    'Enter the correct email format (for example: user@mail.com)',
+                type: 'error',
+            });
+            return;
+        }
+
+        if (password.length < 6) {
+            setToast({
+                show: true,
+                message: 'Password must contain at least 6 characters',
+                type: 'error',
+            });
+            return;
+        }
+
         setLoader(true);
 
         try {
@@ -35,12 +65,11 @@ function Login() {
             setEmail('');
             setPassword('');
         } catch (err) {
-            let errorMessage = 'Сталася непередбачувана помилка';
+            let errorMessage = 'An unexpected error occurred';
             if (axios.isAxiosError(err)) {
-                errorMessage =
-                    err.response?.data.message || 'Помилка при вході';
+                errorMessage = err.response?.data.message || 'Login error';
             } else {
-                console.error('Невідома помилка:', err);
+                console.error('Unknown error:', err);
             }
             setToast({
                 show: true,
@@ -66,7 +95,7 @@ function Login() {
                             <MdEmail className="login-page__input-icon" />
                             <input
                                 className="login-page__input"
-                                type="mail"
+                                type="email"
                                 value={email}
                                 onChange={e => setEmail(e.target.value)}
                                 required

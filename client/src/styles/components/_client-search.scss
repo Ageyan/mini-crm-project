@@ -1,0 +1,48 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+.client-search {
+    position: relative;
+    width: 100%;
+    max-width: 500px;
+    margin: 0 auto 30px;
+
+    &:focus-within {
+        .client-search__icon {
+            color: $black;
+        }
+    }
+
+    @include tablet {
+        margin: 0 auto 50px;
+        max-width: 600px;
+    }
+
+    &__icon {
+        position: absolute;
+        color: $color-light-gray;
+        width: 26px;
+        height: 26px;
+        top: calc(50% - 14px);
+        left: 10px;
+        transition: color 0.3s ease-in-out;
+    }
+
+    &__input {
+        width: 100%;
+        font-size: 1rem;
+        font-weight: 400;
+        background: $white;
+        color: $black;
+        border-radius: 20px;
+        padding: 10px 16px 10px 48px;
+
+        @include tablet {
+            font-size: 1.1rem;
+        }
+
+        @include desktop {
+            padding: 12px 20px 12px 48px;
+        }
+    }
+}

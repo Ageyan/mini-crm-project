@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react';
+import type { ToastState } from '../types/toast';
 import type { NewClient, Client } from '../types/clients';
 import {
     getClients,
@@ -8,7 +9,9 @@ import {
 } from '../services/clientService';
 import ClientForm from '../components/ClientForm';
 import axios from 'axios';
+import Toast from '../components/Toast';
 import ClientContainer from '../components/ClientContainer';
+import ClientSearch from '../components/ClientSearch';
 
 function Clients() {
     const [clients, setClients] = useState<Client[]>([]);
@@ -19,6 +22,12 @@ function Clients() {
         status: 'active',
     });
     const [editingClient, setEditingClient] = useState<Client | null>(null);
+    const [searchTerm, setSearchTerm] = useState<string>('');
+    const [toast, setToast] = useState<ToastState>({
+        show: false,
+        message: '',
+        type: 'success',
+    });
     const [btnLoader, setBtnLoader] = useState<boolean>(false);
     const [loader, setLoader] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
@@ -52,7 +61,40 @@ function Clients() {
 
     const handleSubmit = async (event: React.SubmitEvent) => {
         event.preventDefault();
+
+        if (!form.name.trim() || !form.email.trim() || !form.phone.trim()) {
+            setToast({
+                show: true,
+                message: 'Please fill in all fields',
+                type: 'error',
+            });
+            return;
+        }
+
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(form.email)) {
+            setToast({
+                show: true,
+                message:
+                    'Enter the correct email format (for example: user@mail.com)',
+                type: 'error',
+            });
+            return;
+        }
+
+        const phoneRegex = /^\+?[0-9\s\-()]{10,20}$/;
+        if (!phoneRegex.test(form.phone)) {
+            setToast({
+                show: true,
+                message:
+                    'Please enter a valid phone number (minimum 10 digits)',
+                type: 'error',
+            });
+            return;
+        }
+
         setBtnLoader(true);
+
         try {
             if (editingClient) {
                 const updated = await updateClient(editingClient.id, form);
@@ -76,7 +118,18 @@ function Clients() {
                 status: 'active',
             });
         } catch (err) {
-            console.error('Error message:', err);
+            let errorMessage = 'An unexpected error occurred';
+            if (axios.isAxiosError(err)) {
+                errorMessage =
+                    err.response?.data.message || 'Client form error';
+            } else {
+                console.error('Unknown error:', err);
+            }
+            setToast({
+                show: true,
+                message: errorMessage,
+                type: 'error',
+            });
         } finally {
             setBtnLoader(false);
         }
@@ -96,8 +149,16 @@ function Clients() {
         setClients(prev => prev.filter(c => c.id !== id));
     };
 
+    const searсhClient = searchTerm.trim()
+        ? clients.filter(client =>
+              client.name
+                  .toLocaleLowerCase()
+                  .includes(searchTerm.toLocaleLowerCase()),
+          )
+        : clients;
+
     return (
-        <div className="client">
+        <div className="clients-page">
             <ClientForm
                 form={form}
                 setForm={setForm}
@@ -105,8 +166,12 @@ function Clients() {
                 editingClient={editingClient}
                 btnLoader={btnLoader}
             />
+            <ClientSearch
+                searchTerm={searchTerm}
+                setSearchTerm={setSearchTerm}
+            />
             <ClientContainer
-                clients={clients}
+                searсhClient={searсhClient}
                 loader={loader}
                 error={error}
                 setForm={setForm}
@@ -114,6 +179,13 @@ function Clients() {
                 toggleClientStatus={toggleClientStatus}
                 handleDeleteClient={handleDeleteClient}
             />
+            {toast.show && (
+                <Toast
+                    message={toast.message}
+                    type={toast.type}
+                    onClose={() => setToast(prev => ({ ...prev, show: false }))}
+                />
+            )}
         </div>
     );
 }

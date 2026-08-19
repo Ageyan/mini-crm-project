@@ -4,9 +4,11 @@
 @use './base/reset';
 @use './base/typography';
 
+@use './components/client-card';
+@use './components/client-search';
 @use './components/clients-container';
 @use './components/clients-form';
-@use './components/clients';
+@use './components/clients-page';
 @use './components/dash-card';
 @use './components/dashboard';
 @use './components/error-message';
