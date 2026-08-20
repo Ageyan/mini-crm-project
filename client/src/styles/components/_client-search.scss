@@ -4,8 +4,7 @@
 .client-search {
     position: relative;
     width: 100%;
-    max-width: 500px;
-    margin: 0 auto 30px;
+    max-width: 600px;
 
     &:focus-within {
         .client-search__icon {
@@ -14,8 +13,7 @@
     }
 
     @include tablet {
-        margin: 0 auto 50px;
-        max-width: 600px;
+        max-width: 700px;
     }
 
     &__icon {

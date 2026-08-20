@@ -1,0 +1,46 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+.client-filter {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px;
+    flex-direction: column;
+    max-width: 200px;
+
+    @include tablet {
+        max-width: 300px;
+    }
+
+    @include desktop {
+        flex-direction: row;
+        max-width: 400px;
+    }
+
+    &__btn {
+        color: $color-dark-gray;
+        font-size: 1.2rem;
+        text-decoration: none;
+        transition: all 0.5s ease-in-out;
+        cursor: pointer;
+
+        @include tablet {
+            font-size: 1.4rem;
+        }
+
+        @include desktop {
+            font-size: 1.5rem;
+        }
+
+        &:hover {
+            color: $color-light-gray;
+            transform: translateY(-3px);
+        }
+
+        &.active {
+            color: $white;
+        }
+    }
+}

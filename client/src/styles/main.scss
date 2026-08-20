@@ -5,13 +5,15 @@
 @use './base/typography';
 
 @use './components/client-card';
+@use './components/client-delete-modal';
+@use './components/client-filter';
 @use './components/client-search';
 @use './components/clients-container';
 @use './components/clients-form';
 @use './components/clients-page';
 @use './components/dash-card';
 @use './components/dashboard';
-@use './components/error-message';
+@use './components/error-empty-message';
 @use './components/header';
 @use './components/layout';
 @use './components/loader';

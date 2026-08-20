@@ -1,0 +1,99 @@
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
+
+.client-delete {
+    &__backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba($black, 0.7);
+        backdrop-filter: blur(4px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+
+    &__modal {
+        background: $bg-gradient-dark;
+        border: 1px solid $color-dark-gray;
+        border-radius: 16px;
+        padding: 30px 20px;
+        width: 90%;
+        max-width: 420px;
+        position: relative;
+        text-align: center;
+        color: $white;
+        box-shadow: 0 15px 40px rgba($black, 0.6);
+        animation: modalFadeIn 0.3s ease forwards;
+
+        @include tablet {
+            padding: 40px 30px;
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: $white;
+        }
+
+        p {
+            font-size: 1rem;
+            color: $color-accent-gray;
+            line-height: 1.5;
+            margin-bottom: 30px;
+        }
+    }
+
+    &__cancel-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: transparent;
+        border: none;
+        color: $color-light-gray;
+        font-size: 1.2rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+
+        &:hover {
+            color: $white;
+        }
+    }
+
+    &__btn {
+        background-color: $delete;
+        color: $white;
+        border: none;
+        border-radius: 8px;
+        padding: 12px 24px;
+        font-size: 1.1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+            opacity 0.3s ease,
+            transform 0.1s ease;
+        width: 100%;
+
+        &:hover {
+            opacity: 0.85;
+        }
+
+        &:active {
+            transform: scale(0.98);
+        }
+    }
+}
+
+@keyframes modalFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

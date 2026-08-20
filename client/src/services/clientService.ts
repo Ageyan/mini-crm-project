@@ -12,7 +12,7 @@ export const addClient = async (client: Client): Promise<Client> => {
     return data;
 };
 
-export const deleteClient = async (id: string): Promise<void> => {
+export const deleteClient = async (id: string | null): Promise<void> => {
     await api.delete(`/clients/${id}`);
 };
 

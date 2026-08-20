@@ -26,7 +26,7 @@ export const updateTask = async (req, res) => {
         const task = await Task.findByIdAndUpdate(taskId, req.body, {
             new: true,
             runValidators: true,
-        });
+        }).populate('clientId');
 
         if (!task) {
             return res.status(404).json({ message: 'Task not found' });

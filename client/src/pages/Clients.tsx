@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import type { ToastState } from '../types/toast';
-import type { NewClient, Client } from '../types/clients';
+import type { NewClient, Client, ClientStatus } from '../types/clients';
 import {
     getClients,
     addClient,
@@ -12,6 +12,8 @@ import axios from 'axios';
 import Toast from '../components/Toast';
 import ClientContainer from '../components/ClientContainer';
 import ClientSearch from '../components/ClientSearch';
+import ClientDeleteModal from '../components/ClientDeleteModal';
+import ClientFilter from '../components/ClientFilter';
 
 function Clients() {
     const [clients, setClients] = useState<Client[]>([]);
@@ -23,12 +25,17 @@ function Clients() {
     });
     const [editingClient, setEditingClient] = useState<Client | null>(null);
     const [searchTerm, setSearchTerm] = useState<string>('');
+    const [searchStatus, setSearchStatus] = useState<'all' | ClientStatus>(
+        'all',
+    );
     const [toast, setToast] = useState<ToastState>({
         show: false,
         message: '',
         type: 'success',
     });
     const [btnLoader, setBtnLoader] = useState<boolean>(false);
+    const [isDeleteModal, setIsDeleteModal] = useState<boolean>(false);
+    const [idDeleteClient, setIdDeleteClient] = useState<null | string>(null);
     const [loader, setLoader] = useState<boolean>(false);
     const [error, setError] = useState<string>('');
 
@@ -102,6 +109,11 @@ function Clients() {
                     prev.map(c => (c.id === updated.id ? updated : c)),
                 );
                 setEditingClient(null);
+                setToast({
+                    show: true,
+                    message: 'Customer data has been updated successfully',
+                    type: 'success',
+                });
             } else {
                 const created = await addClient({
                     ...form,
@@ -109,6 +121,11 @@ function Clients() {
                 });
 
                 setClients(prev => [...prev, created]);
+                setToast({
+                    show: true,
+                    message: 'The client has been added successfully',
+                    type: 'success',
+                });
             }
 
             setForm({
@@ -136,26 +153,82 @@ function Clients() {
     };
 
     const toggleClientStatus = async (client: Client) => {
-        const newStatus = client.status === 'active' ? 'inactive' : 'active';
-        const updated = await updateClient(client.id, {
-            ...client,
-            status: newStatus,
-        });
-        setClients(prev => prev.map(c => (c.id === updated.id ? updated : c)));
+        try {
+            const newStatus =
+                client.status === 'active' ? 'inactive' : 'active';
+            const updated = await updateClient(client.id, {
+                ...client,
+                status: newStatus,
+            });
+            setClients(prev =>
+                prev.map(c => (c.id === updated.id ? updated : c)),
+            );
+
+            setToast({
+                show: true,
+                message: 'The client status has been successfully updated',
+                type: 'success',
+            });
+        } catch (err) {
+            let errorMessage = 'An unexpected error occurred';
+            if (axios.isAxiosError(err)) {
+                errorMessage =
+                    err.response?.data.message ||
+                    'Error changing client status';
+            } else {
+                console.error('Unknown error:', err);
+            }
+            setToast({
+                show: true,
+                message: errorMessage,
+                type: 'error',
+            });
+        }
     };
 
-    const handleDeleteClient = async (id: string) => {
-        await deleteClient(id);
-        setClients(prev => prev.filter(c => c.id !== id));
+    const handleDeleteClient = async (id: string | null) => {
+        if (!id) return;
+
+        try {
+            await deleteClient(id);
+            setClients(prev => prev.filter(c => c.id !== id));
+
+            setToast({
+                show: true,
+                message: 'The client has been successfully removed',
+                type: 'success',
+            });
+        } catch (err) {
+            let errorMessage = 'An unexpected error occurred';
+            if (axios.isAxiosError(err)) {
+                errorMessage =
+                    err.response?.data.message || 'Failed to delete client';
+            } else {
+                console.error('Unknown error:', err);
+            }
+            setToast({
+                show: true,
+                message: errorMessage,
+                type: 'error',
+            });
+        } finally {
+            setIsDeleteModal(false);
+            setIdDeleteClient(null);
+        }
     };
 
-    const searсhClient = searchTerm.trim()
+    const searchClient = searchTerm.trim()
         ? clients.filter(client =>
               client.name
                   .toLocaleLowerCase()
                   .includes(searchTerm.toLocaleLowerCase()),
           )
         : clients;
+
+    const filterClient =
+        searchStatus === 'all'
+            ? searchClient
+            : searchClient.filter(c => c.status === searchStatus);
 
     return (
         <div className="clients-page">
@@ -166,19 +239,34 @@ function Clients() {
                 editingClient={editingClient}
                 btnLoader={btnLoader}
             />
-            <ClientSearch
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-            />
+            <div className="clients-page__filter-container">
+                <ClientSearch
+                    searchTerm={searchTerm}
+                    setSearchTerm={setSearchTerm}
+                />
+                <ClientFilter
+                    setSearchStatus={setSearchStatus}
+                    searchStatus={searchStatus}
+                />
+            </div>
             <ClientContainer
-                searсhClient={searсhClient}
+                filterClient={filterClient}
                 loader={loader}
                 error={error}
                 setForm={setForm}
                 setEditingClient={setEditingClient}
                 toggleClientStatus={toggleClientStatus}
-                handleDeleteClient={handleDeleteClient}
+                setIsDeleteModal={setIsDeleteModal}
+                setIdDeleteClient={setIdDeleteClient}
             />
+            {isDeleteModal && (
+                <ClientDeleteModal
+                    setIsDeleteModal={setIsDeleteModal}
+                    setIdDeleteClient={setIdDeleteClient}
+                    handleDeleteClient={handleDeleteClient}
+                    idDeleteClient={idDeleteClient}
+                />
+            )}
             {toast.show && (
                 <Toast
                     message={toast.message}

@@ -6,6 +6,9 @@ import TaskFilter from '../components/TaskFilter';
 import TaskCard from '../components/TaskCard';
 import Loader from '../components/Loader';
 import { useCRMData } from '../hooks/useCRMData';
+import type { ToastState } from '../types/toast';
+import Toast from '../components/Toast';
+import axios from 'axios';
 
 function Tasks() {
     const { tasks, setTasks, clients, loader, error } = useCRMData();
@@ -15,6 +18,11 @@ function Tasks() {
         status: 'todo',
         clientId: '',
     });
+    const [toast, setToast] = useState<ToastState>({
+        show: false,
+        message: '',
+        type: 'success',
+    });
     const [editingTask, setEditingTask] = useState<Task | null>(null);
 
     const handleSubmit = async (event: React.SubmitEvent) => {
@@ -22,28 +30,76 @@ function Tasks() {
 
         if (!form.title || !form.clientId) return;
 
-        if (editingTask) {
-            const update = await updateTask(editingTask.id, form);
-            setTasks(prev =>
-                prev.map(task => (task.id === editingTask.id ? update : task)),
-            );
+        try {
+            if (editingTask) {
+                const update = await updateTask(editingTask.id, form);
+                setTasks(prev =>
+                    prev.map(task =>
+                        task.id === editingTask.id ? update : task,
+                    ),
+                );
 
-            setEditingTask(null);
-        } else {
-            const newTask = await addTask(form);
-            setTasks(prev => [...prev, newTask]);
+                setEditingTask(null);
+                setToast({
+                    show: true,
+                    message: 'The task data has been updated successfully',
+                    type: 'success',
+                });
+            } else {
+                const newTask = await addTask(form);
+                setTasks(prev => [...prev, newTask]);
+                setToast({
+                    show: true,
+                    message: 'The task has been added successfully',
+                    type: 'success',
+                });
+            }
+
+            setForm({
+                title: '',
+                status: 'todo',
+                clientId: '',
+            });
+        } catch (err) {
+            let errorMessage = 'An unexpected error occurred';
+            if (axios.isAxiosError(err)) {
+                errorMessage =
+                    err.response?.data.message ||
+                    'Error while working with a task';
+            } else {
+                console.error('Unknown error:', err);
+            }
+            setToast({
+                show: true,
+                message: errorMessage,
+                type: 'error',
+            });
         }
-
-        setForm({
-            title: '',
-            status: 'todo',
-            clientId: '',
-        });
     };
 
     const handleDeleteTask = async (id: string) => {
-        await deleteTask(id);
-        setTasks(prev => prev.filter(t => t.id !== id));
+        try {
+            await deleteTask(id);
+            setTasks(prev => prev.filter(t => t.id !== id));
+            setToast({
+                show: true,
+                message: 'The task has been successfully removed',
+                type: 'success',
+            });
+        } catch (err) {
+            let errorMessage = 'An unexpected error occurred';
+            if (axios.isAxiosError(err)) {
+                errorMessage =
+                    err.response?.data.message || 'Failed to delete task';
+            } else {
+                console.error('Unknown error:', err);
+            }
+            setToast({
+                show: true,
+                message: errorMessage,
+                type: 'error',
+            });
+        }
     };
 
     const filteredTask =
@@ -53,13 +109,36 @@ function Tasks() {
         taskId: string,
         status: TaskStatus,
     ): Promise<void> => {
-        const update = await updateTask(taskId, { status });
+        try {
+            const update = await updateTask(taskId, { status });
 
-        setTasks(prev =>
-            prev.map(task =>
-                task.id === taskId ? { ...task, status: update.status } : task,
-            ),
-        );
+            setTasks(prev =>
+                prev.map(task =>
+                    task.id === taskId
+                        ? { ...task, status: update.status }
+                        : task,
+                ),
+            );
+            setToast({
+                show: true,
+                message: 'The task status has been updated successfully',
+                type: 'success',
+            });
+        } catch (err) {
+            let errorMessage = 'An unexpected error occurred';
+            if (axios.isAxiosError(err)) {
+                errorMessage =
+                    err.response?.data.message ||
+                    'Failed to update task status';
+            } else {
+                console.error('Unknown error:', err);
+            }
+            setToast({
+                show: true,
+                message: errorMessage,
+                type: 'error',
+            });
+        }
     };
 
     return (
@@ -87,8 +166,20 @@ function Tasks() {
                                 handleChangeStatus={handleChangeStatus}
                             />
                         ))}
+                        {filteredTask.length === 0 && (
+                            <div className="empty-container">
+                                No tasks found
+                            </div>
+                        )}
                     </div>
                 </div>
+            )}
+            {toast.show && (
+                <Toast
+                    message={toast.message}
+                    type={toast.type}
+                    onClose={() => setToast(prev => ({ ...prev, show: false }))}
+                />
             )}
         </div>
     );

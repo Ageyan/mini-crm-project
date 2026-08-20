@@ -1,4 +1,5 @@
 import Client from '../models/Client.js';
+import Task from '../models/Task.js';
 
 export const createClient = async (req, res) => {
     try {
@@ -46,6 +47,8 @@ export const deleteClient = async (req, res) => {
         if (!client) {
             return res.status(404).json({ message: 'Client not found' });
         }
+
+        await Task.deleteMany({ clientId: clientId });
 
         return res.status(200).json({ message: 'Client deleted successfully' });
     } catch (e) {

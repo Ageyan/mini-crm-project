@@ -8,8 +8,9 @@ interface ClientContainerProps {
     setForm: React.Dispatch<React.SetStateAction<NewClient>>;
     setEditingClient: React.Dispatch<React.SetStateAction<Client | null>>;
     toggleClientStatus: (client: Client) => Promise<void>;
-    handleDeleteClient: (id: string) => Promise<void>;
-    searсhClient: Client[];
+    filterClient: Client[];
+    setIsDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setIdDeleteClient: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const ClientContainer = ({
@@ -18,8 +19,9 @@ const ClientContainer = ({
     setForm,
     setEditingClient,
     toggleClientStatus,
-    handleDeleteClient,
-    searсhClient,
+    filterClient,
+    setIsDeleteModal,
+    setIdDeleteClient,
 }: ClientContainerProps) => {
     return (
         <div className="client-container">
@@ -27,16 +29,21 @@ const ClientContainer = ({
             {error && <div className="error-message">{error}</div>}
             {!loader &&
                 !error &&
-                searсhClient.map(client => (
+                filterClient.length > 0 &&
+                filterClient.map(client => (
                     <ClientCard
                         key={client.id}
                         client={client}
                         setForm={setForm}
                         setEditingClient={setEditingClient}
                         toggleClientStatus={toggleClientStatus}
-                        handleDeleteClient={handleDeleteClient}
+                        setIsDeleteModal={setIsDeleteModal}
+                        setIdDeleteClient={setIdDeleteClient}
                     />
                 ))}
+            {!error && !loader && filterClient.length === 0 && (
+                <div className="empty-container">No clients found</div>
+            )}
         </div>
     );
 };

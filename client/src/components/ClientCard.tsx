@@ -11,7 +11,8 @@ interface ClientCardProps {
     setForm: React.Dispatch<React.SetStateAction<NewClient>>;
     setEditingClient: React.Dispatch<React.SetStateAction<Client | null>>;
     toggleClientStatus: (client: Client) => Promise<void>;
-    handleDeleteClient: (id: string) => Promise<void>;
+    setIsDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setIdDeleteClient: React.Dispatch<React.SetStateAction<string | null>>;
 }
 
 const ClientCard = ({
@@ -19,7 +20,8 @@ const ClientCard = ({
     setForm,
     setEditingClient,
     toggleClientStatus,
-    handleDeleteClient,
+    setIsDeleteModal,
+    setIdDeleteClient,
 }: ClientCardProps) => {
     return (
         <div className={`client-card client-card--${client.status}`}>
@@ -57,7 +59,10 @@ const ClientCard = ({
             </button>
             <button
                 className="client-card__btn delete"
-                onClick={() => handleDeleteClient(client.id)}
+                onClick={() => {
+                    setIsDeleteModal(true);
+                    setIdDeleteClient(client.id);
+                }}
             >
                 Delete <FaUserLargeSlash style={{ fontSize: '1.1rem' }} />
             </button>
