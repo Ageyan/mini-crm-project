@@ -76,10 +76,11 @@
         align-items: center;
         justify-content: flex-start;
         gap: 10px;
-        margin: 0 auto 30px;
+        margin: 0 auto 16px;
         flex-direction: column;
 
         @include tablet {
+            margin: 0 auto 30px;
             flex-direction: row;
             gap: 60px;
         }

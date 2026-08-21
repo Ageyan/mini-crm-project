@@ -38,9 +38,12 @@
             gap: 28px;
         }
 
+        @include large-tablet {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
         @include desktop {
             padding: 36px 22px;
-            grid-template-columns: repeat(3, 1fr);
             gap: 30px;
         }
 

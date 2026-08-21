@@ -23,18 +23,15 @@
 
     &__input {
         width: 100%;
-        max-width: 400px;
         font-size: 1rem;
         font-weight: 400;
         background: $white;
         color: $black;
         border-radius: 20px;
-        padding: 6px 14px;
+        padding: 10px 16px;
 
         @include tablet {
             font-size: 1.1rem;
-            padding: 10px 16px;
-            max-width: 500px;
         }
 
         @include desktop {

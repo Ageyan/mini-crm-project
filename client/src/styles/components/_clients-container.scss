@@ -18,6 +18,10 @@
         grid-template-columns: repeat(2, 1fr);
     }
 
+    @include large-tablet {
+        grid-template-columns: repeat(3, 1fr);
+    }
+
     @include desktop {
         padding: 24px;
         gap: 30px;
