@@ -1,4 +1,4 @@
-import type { NewClient, Client } from '../types/clients';
+import type { NewClient, Client } from '../../types/clients';
 import {
     FaUserGear,
     FaUserLargeSlash,

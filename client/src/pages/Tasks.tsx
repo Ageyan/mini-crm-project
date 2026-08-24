@@ -1,14 +1,16 @@
 import { useState } from 'react';
+import axios from 'axios';
+
+import type { ToastState } from '../types/toast';
 import type { Task, NewTask, TaskStatus } from '../types/task';
 import { addTask, deleteTask, updateTask } from '../services/taskService';
-import TaskForm from '../components/TaskForm';
-import TaskFilter from '../components/TaskFilter';
-import TaskCard from '../components/TaskCard';
-import Loader from '../components/Loader';
 import { useCRMData } from '../hooks/useCRMData';
-import type { ToastState } from '../types/toast';
-import Toast from '../components/Toast';
-import axios from 'axios';
+
+import TaskForm from '../components/tasks/TaskForm';
+import TaskFilter from '../components/tasks/TaskFilter';
+import TaskCard from '../components/tasks/TaskCard';
+import Loader from '../components/common/Loader';
+import Toast from '../components/common/Toast';
 
 function Tasks() {
     const { tasks, setTasks, clients, loader, error } = useCRMData();

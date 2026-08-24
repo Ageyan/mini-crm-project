@@ -1,12 +1,15 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
+
 import { handleLogin } from '../services/authService';
 import type { ToastState } from '../types/toast';
+
+import Toast from '../components/common/Toast';
+import Loader from '../components/common/Loader';
+
 import { RiLockPasswordFill } from 'react-icons/ri';
 import { MdEmail } from 'react-icons/md';
-import axios from 'axios';
-import Toast from '../components/Toast';
-import Loader from '../components/Loader';
 
 function Login() {
     const [email, setEmail] = useState<string>('');

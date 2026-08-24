@@ -1,6 +1,8 @@
-import api from './api';
-import type { Client, NewClient } from '../types/clients';
 import type { AxiosRequestConfig } from 'axios';
+
+import type { Client, NewClient } from '../types/clients';
+
+import api from './api';
 
 export const getClients = async (config?: AxiosRequestConfig): Promise<Client[]> => {
     const { data } = await api.get<Client[]>('/clients', config);

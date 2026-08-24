@@ -4,23 +4,26 @@
 @use './base/reset';
 @use './base/typography';
 
-@use './components/client-card';
-@use './components/client-delete-modal';
-@use './components/client-filter';
-@use './components/client-search';
-@use './components/clients-container';
-@use './components/clients-form';
-@use './components/clients-page';
+@use './components/clients/client-card';
+@use './components/clients/client-delete-modal';
+@use './components/clients/client-filter';
+@use './components/clients/client-search';
+@use './components/clients/clients-container';
+@use './components/clients/clients-form';
+@use './components/clients/clients-page';
+
+@use './components/common/error-empty-message';
+@use './components/common/loader';
+@use './components/common/toast';
+
+@use './components/tasks/task-card';
+@use './components/tasks/task-custom-select';
+@use './components/tasks/task-filter';
+@use './components/tasks/task-form';
+@use './components/tasks/tasks';
+
 @use './components/dash-card';
 @use './components/dashboard';
-@use './components/error-empty-message';
 @use './components/header';
 @use './components/layout';
-@use './components/loader';
 @use './components/login';
-@use './components/task-card';
-@use './components/task-custom-select';
-@use './components/task-filter';
-@use './components/task-form';
-@use './components/tasks';
-@use './components/toast';

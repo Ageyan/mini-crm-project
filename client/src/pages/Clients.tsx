@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import axios from 'axios';
+
 import type { ToastState } from '../types/toast';
 import type { NewClient, Client, ClientStatus } from '../types/clients';
 import {
@@ -7,13 +9,13 @@ import {
     updateClient,
     deleteClient,
 } from '../services/clientService';
-import ClientForm from '../components/ClientForm';
-import axios from 'axios';
-import Toast from '../components/Toast';
-import ClientContainer from '../components/ClientContainer';
-import ClientSearch from '../components/ClientSearch';
-import ClientDeleteModal from '../components/ClientDeleteModal';
-import ClientFilter from '../components/ClientFilter';
+
+import ClientForm from '../components/clients/ClientForm';
+import Toast from '../components/common/Toast';
+import ClientContainer from '../components/clients/ClientContainer';
+import ClientSearch from '../components/clients/ClientSearch';
+import ClientDeleteModal from '../components/clients/ClientDeleteModal';
+import ClientFilter from '../components/clients/ClientFilter';
 
 function Clients() {
     const [clients, setClients] = useState<Client[]>([]);

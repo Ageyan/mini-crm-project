@@ -1,6 +1,6 @@
 import { BrowserRouter, Route, Routes, Navigate } from 'react-router-dom';
 import { lazy, Suspense } from 'react';
-import Loader from '../components/Loader';
+import Loader from '../components/common/Loader';
 
 const Login = lazy(() => import('../pages/Login'));
 const Clients = lazy(() => import('../pages/Clients'));

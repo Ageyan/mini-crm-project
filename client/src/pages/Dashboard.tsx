@@ -1,6 +1,7 @@
 import { useCRMData } from '../hooks/useCRMData';
+
 import DashCard from '../components/DashCard';
-import Loader from '../components/Loader';
+import Loader from '../components/common/Loader';
 
 function Dashboard() {
     const { tasks, clients, loader, error } = useCRMData();
