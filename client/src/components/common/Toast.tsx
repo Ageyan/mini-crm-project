@@ -2,13 +2,13 @@ import { useEffect } from 'react';
 import { IoMdClose } from 'react-icons/io';
 
 type ToastProps = {
+    show: boolean;
     message: string;
     type: 'success' | 'error';
     onClose: () => void;
-    children?: React.ReactNode;
 };
 
-const Toast = ({ message, type, onClose, children }: ToastProps) => {
+const Toast = ({ message, type, onClose, show }: ToastProps) => {
     useEffect(() => {
         const timer = setTimeout(() => {
             onClose();
@@ -18,10 +18,9 @@ const Toast = ({ message, type, onClose, children }: ToastProps) => {
     }, [onClose]);
 
     return (
-        <div className={`toast toast--${type}`}>
+        <div className={`toast toast--${type} ${show ? 'show' : ''}`}>
             <div className="toast__content">
                 <p className="toast__message">{message}</p>
-                {children && <div className="toast__actions">{children}</div>}
             </div>
             <button
                 className="toast__close-btn"

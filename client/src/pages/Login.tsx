@@ -126,13 +126,12 @@ function Login() {
                     </button>
                 </form>
             </div>
-            {toast.show && (
-                <Toast
-                    message={toast.message}
-                    type={toast.type}
-                    onClose={() => setToast(prev => ({ ...prev, show: false }))}
-                />
-            )}
+            <Toast
+                show={toast.show}
+                message={toast.message}
+                type={toast.type}
+                onClose={() => setToast(prev => ({ ...prev, show: false }))}
+            />
         </div>
     );
 }

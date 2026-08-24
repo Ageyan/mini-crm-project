@@ -15,8 +15,20 @@
     z-index: 1000;
     min-width: 200px;
     max-width: 420px;
-    animation: slideIn 0.3s ease-in-out forwards;
     border-left: 8px solid transparent;
+    transform: translateX(120%);
+    opacity: 0;
+    visibility: hidden;
+    transition:
+        transform 0.4s cubic-bezier(0.25, 1, 0.5, 1),
+        opacity 0.4s ease,
+        visibility 0.4s;
+
+    &.show {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+    }
 
     @include tablet {
         top: 60px;
@@ -99,16 +111,5 @@
             align-items: center;
             justify-content: center;
         }
-    }
-}
-
-@keyframes slideIn {
-    from {
-        transform: translateX(120%);
-        opacity: 0;
-    }
-    to {
-        transform: translateX(0);
-        opacity: 1;
     }
 }
