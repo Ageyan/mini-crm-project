@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import type { Task, NewTask } from '../types/task';
-import type { Client } from '../types/clients';
+import type { Task, NewTask } from '../../types/task';
+import type { Client } from '../../types/clients';
 import TaskCustomSelect from './TaskCustomSelect';
 
 type TaskFormProps = {

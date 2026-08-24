@@ -1,4 +1,4 @@
-import type { ClientStatus } from '../types/clients';
+import type { ClientStatus } from '../../types/clients';
 
 interface ClientFilterProps {
     setSearchStatus: React.Dispatch<React.SetStateAction<ClientStatus | 'all'>>;

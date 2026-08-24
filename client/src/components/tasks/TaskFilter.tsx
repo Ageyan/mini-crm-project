@@ -1,4 +1,4 @@
-import type { TaskStatus } from '../types/task';
+import type { TaskStatus } from '../../types/task';
 
 type TasksFilter = 'all' | TaskStatus;
 

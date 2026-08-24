@@ -1,5 +1,5 @@
-import type { Client } from '../types/clients';
-import type { NewTask } from '../types/task';
+import type { Client } from '../../types/clients';
+import type { NewTask } from '../../types/task';
 
 interface TaskSelectProps {
     selectedClient: Client | undefined;

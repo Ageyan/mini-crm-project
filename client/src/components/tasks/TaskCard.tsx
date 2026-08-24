@@ -1,4 +1,4 @@
-import type { Task, NewTask, TaskStatus } from '../types/task';
+import type { Task, NewTask, TaskStatus } from '../../types/task';
 
 interface TaskCardProps {
     task: Task;
