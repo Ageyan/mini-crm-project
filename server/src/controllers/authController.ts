@@ -1,8 +1,11 @@
 import Admin from "../models/Admin.js";
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
+import type { Request, Response } from "express";
 
-export const login = async(req, res) => {
+import { errorHandler } from '../utils/errorHandler.js';
+
+export const login = async(req: Request, res: Response) => {
     const { email, password } = req.body;
 
     try {
@@ -22,7 +25,7 @@ export const login = async(req, res) => {
 
         const token = jwt.sign(
             { adminId: admin.id },
-            process.env.JWT_SECRET,
+            process.env.JWT_SECRET as string,
             { expiresIn: '1d' }
         )
 
@@ -33,8 +36,7 @@ export const login = async(req, res) => {
                 email: admin.email
             }
         })
-    } catch (error) {
-        console.error('Login Error:', error);
-        res.status(500).json({ message: 'Server error when trying to log in' });
+    } catch (err) {
+        errorHandler(err, res, 'when trying to log in');
     }
 }

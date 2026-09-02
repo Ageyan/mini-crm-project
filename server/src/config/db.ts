@@ -1,7 +1,7 @@
 import mongoose from 'mongoose';
 import 'dotenv/config';
 
-const URI = process.env.MONGO_URI;
+const URI = process.env.MONGO_URI as string;
 
 if (!URI) {
     throw new Error(
@@ -9,7 +9,14 @@ if (!URI) {
     );
 }
 
-let cached = global.mongoose;
+declare global {
+    var mongoose: {
+        conn: typeof import('mongoose') | null;
+        promise: Promise<typeof import('mongoose')> | null;
+    };
+}
+
+let cached  = global.mongoose;
 
 if (!cached) {
     cached = global.mongoose = { conn: null, promise: null };

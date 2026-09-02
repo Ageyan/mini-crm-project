@@ -1,5 +1,6 @@
-import express from 'express';
+import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+
 import connectDB from './config/db.js'; 
 import taskRouter from './routes/taskRoutes.js';
 import clientRouter from './routes/clientRoutes.js';
@@ -19,7 +20,7 @@ app.use(
 
 app.use(express.json());
 
-app.use((req, res, next) => {
+app.use((req: Request, res: Response, next: NextFunction) => {
     res.setHeader(
         'Cache-Control',
         'no-store, no-cache, must-revalidate, proxy-revalidate',
@@ -29,14 +30,21 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(async (req, res, next) => {
+app.use(async (req: Request, res: Response, next: NextFunction) => {
     try {
         await connectDB();
         next();
     } catch (err) {
-        res.status(500).json({
-            message: 'Database connection failed',
-            error: err.message,
+        if (err instanceof Error) {
+            return res.status(500).json({
+                message: 'Database connection failed',
+                error: err.message, 
+            });
+        } 
+
+        return res.status(500).json({
+            message: 'Database connection error due to unknown error',
+            error: err, 
         });
     }
 });

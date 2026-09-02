@@ -1,6 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-const taskSchema = mongoose.Schema(
+import type { ITask } from '../types/taks.types.js';
+
+const taskSchema = new Schema<ITask>(
     {
         title: {
             type: String,
@@ -19,15 +21,16 @@ const taskSchema = mongoose.Schema(
     {
         timestamps: true,
         toJSON: {
-            transform: (_, obj) => {
-                obj.id = obj._id;
-                delete obj._id;
-                return obj;
+            transform: (_, ret: Record<string, any>) => {
+                ret.id = ret._id;
+                delete ret._id;
+                delete ret.__v;
+                return ret;
             },
         },
     },
 );
 
-const Task = mongoose.model('Task', taskSchema);
+const Task = mongoose.model<ITask>('Task', taskSchema);
 
 export default Task;

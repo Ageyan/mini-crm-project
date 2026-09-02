@@ -1,6 +1,8 @@
-import mongoose from 'mongoose';
+import mongoose, { Schema } from 'mongoose';
 
-const userSchema = mongoose.Schema(
+import type { IClient } from '../types/client.types.js';
+
+const clietnSchema = new Schema<IClient>(
     {
         name: {
             type: String,
@@ -24,15 +26,16 @@ const userSchema = mongoose.Schema(
     {
         timestamps: true,
         toJSON: {
-            transform: (_, obj) => {
-                obj.id = obj._id;
-                delete obj._id;
-                return obj;
+            transform: (_, ret: Record<string, any>) => {
+                ret.id = ret._id;
+                delete ret._id;
+                delete ret.__v; 
+                return ret;
             },
         },
     },
 );
 
-const Client = mongoose.model('Client', userSchema);
+const Client = mongoose.model<IClient>('Client', clietnSchema);
 
 export default Client;

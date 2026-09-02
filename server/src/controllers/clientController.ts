@@ -1,7 +1,11 @@
+import type { Request, Response } from 'express';
+
+import { errorHandler } from '../utils/errorHandler.js';
+
 import Client from '../models/Client.js';
 import Task from '../models/Task.js';
 
-export const createClient = async (req, res) => {
+export const createClient = async (req : Request, res: Response) => {
     try {
         const { name, email, phone } = req.body;
 
@@ -14,12 +18,12 @@ export const createClient = async (req, res) => {
         const client = await Client.create(clientObj);
 
         return res.status(201).json(client);
-    } catch (e) {
-        res.status(400).json({ message: 'Failed to create the client' });
+    } catch (err) {
+        errorHandler(err, res, 'to create the client');
     }
 };
 
-export const updateClient = async (req, res) => {
+export const updateClient = async (req : Request, res: Response) => {
     try {
         const clientId = req.params.id;
 
@@ -33,12 +37,12 @@ export const updateClient = async (req, res) => {
         }
 
         return res.status(200).json(client);
-    } catch (e) {
-        res.status(400).json({ message: 'Failed to update the client' });
+    } catch (err) {
+        errorHandler(err, res, 'to update the client');
     }
 };
 
-export const deleteClient = async (req, res) => {
+export const deleteClient = async (req : Request, res: Response) => {
     try {
         const clientId = req.params.id;
 
@@ -51,22 +55,22 @@ export const deleteClient = async (req, res) => {
         await Task.deleteMany({ clientId: clientId });
 
         return res.status(200).json({ message: 'Client deleted successfully' });
-    } catch (e) {
-        res.status(400).json({ message: 'Failed to delete the client' });
+    } catch (err) {
+        errorHandler(err, res, 'to delete the client');
     }
 };
 
-export const getClients = async (req, res) => {
+export const getClients = async (req : Request, res: Response) => {
     try {
         const clients = await Client.find();
 
         return res.status(200).json(clients);
-    } catch (e) {
-        res.status(400).json({ message: 'Failed to fetch clients' });
+    } catch (err) {
+        errorHandler(err, res, 'to fetch clients');
     }
 };
 
-export const getClient = async (req, res) => {
+export const getClient = async (req : Request, res: Response) => {
     try {
         const clientId = req.params.id;
 
@@ -77,7 +81,7 @@ export const getClient = async (req, res) => {
         }
 
         return res.status(200).json(client);
-    } catch (e) {
-        res.status(400).json({ message: 'Failed to fetch client' });
+    } catch (err) {
+        errorHandler(err, res, 'to fetch client');
     }
 };

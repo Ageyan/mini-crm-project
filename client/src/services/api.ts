@@ -24,7 +24,7 @@ api.interceptors.response.use(
     },
     (error) => {
         if (error.response && error.response.status === 401) {
-            console.warn('Токен истек или невалиден. Выходим...');
+            console.warn('The token has expired or is invalid. Logging out...');
             localStorage.removeItem('token');
             window.location.href = '/login'; 
         }
