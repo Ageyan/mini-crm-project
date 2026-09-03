@@ -8,7 +8,7 @@ import authRouter from './routes/authRoutes.js';
 import { protect } from './middleware/authMiddleware.js'
 
 const app = express();
-const port = 5050;
+const port = process.env.PORT || 5050;
 
 app.use(
     cors({
@@ -30,34 +30,12 @@ app.use((req: Request, res: Response, next: NextFunction) => {
     next();
 });
 
-app.use(async (req: Request, res: Response, next: NextFunction) => {
-    try {
-        await connectDB();
-        next();
-    } catch (err) {
-        if (err instanceof Error) {
-            return res.status(500).json({
-                message: 'Database connection failed',
-                error: err.message, 
-            });
-        } 
-
-        return res.status(500).json({
-            message: 'Database connection error due to unknown error',
-            error: err, 
-        });
-    }
-});
-
 app.use('/tasks', protect, taskRouter);
 app.use('/clients', protect, clientRouter);
 app.use('/login', authRouter);
 
-
-if (process.env.NODE_ENV !== 'production') {
+connectDB().then(() => {
     app.listen(port, () => {
         console.log(`Server listening at http://localhost:${port}`);
     });
-}
-
-export default app;
+});
