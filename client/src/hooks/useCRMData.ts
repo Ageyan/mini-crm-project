@@ -9,7 +9,7 @@ import type { Client } from '../types/clients';
 export const useCRMData = () => {
     const [tasks, setTasks] = useState<Task[]>([]);
     const [clients, setClients] = useState<Client[]>([]);
-    const [loader, setLoader] = useState<boolean>(false);
+    const [loader, setLoader] = useState<boolean>(true);
     const [error, setError] = useState<string>('');
 
     useEffect(() => {
