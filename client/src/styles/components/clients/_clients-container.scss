@@ -6,7 +6,7 @@
     grid-template-columns: 1fr;
     width: 100%;
     justify-content: center;
-    border-radius: 20px;
+    border-radius: 12px;
     border: 1px solid $btn-color;
     background: $bg-gradient-dark;
     padding: 14px;
@@ -28,7 +28,9 @@
         grid-template-columns: repeat(4, 1fr);
     }
 
-    .empty-container {
+    .empty-container,
+    .loader-container,
+    .error-message {
         grid-column: 1 / -1;
         justify-self: center;
     }

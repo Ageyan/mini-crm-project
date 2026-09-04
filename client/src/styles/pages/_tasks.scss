@@ -1,5 +1,5 @@
-@use '../../utils/variables' as *;
-@use '../../utils/mixins' as *;
+@use '../utils/variables' as *;
+@use '../utils/mixins' as *;
 
 .tasks {
     padding: 30px 0;
@@ -16,7 +16,7 @@
         }
 
         @include desktop {
-            gap: 80px;
+            gap: 60px;
             justify-content: space-between;
             flex-direction: row;
         }
@@ -24,7 +24,7 @@
 
     &__grid-container {
         flex-grow: 1;
-        border-radius: 20px;
+        border-radius: 12px;
         border: 1px solid $btn-color;
         background: $bg-gradient-dark;
         padding: 20px 8px;
@@ -47,7 +47,8 @@
             gap: 30px;
         }
 
-        .empty-container {
+        .empty-container,
+        .error-message {
             grid-column: 1 / -1;
             justify-self: center;
         }

@@ -6,6 +6,8 @@ interface TaskCardProps {
     setEditingTask: React.Dispatch<React.SetStateAction<Task | null>>;
     handleDeleteTask: (id: string) => Promise<void>;
     handleChangeStatus: (taskId: string, status: TaskStatus) => Promise<void>;
+    setDetailsModal: React.Dispatch<React.SetStateAction<boolean>>;
+    setTask: React.Dispatch<React.SetStateAction<Task | null>>;
 }
 
 const TaskCard = ({
@@ -14,6 +16,8 @@ const TaskCard = ({
     setEditingTask,
     handleDeleteTask,
     handleChangeStatus,
+    setTask,
+    setDetailsModal,
 }: TaskCardProps) => {
     return (
         <div className={`task-card task-card--${task.status}`}>
@@ -26,12 +30,22 @@ const TaskCard = ({
                     : task.clientId.name}
             </p>
             <button
+                className="task-card__btn details"
+                onClick={() => {
+                    setTask(task);
+                    setDetailsModal(true);
+                }}
+            >
+                More details
+            </button>
+            <button
                 className="task-card__btn"
                 onClick={() => {
                     setEditingTask(task);
                     setForm({
                         title: task.title,
                         status: task.status,
+                        description: task.description,
                         clientId:
                             typeof task.clientId === 'string'
                                 ? task.clientId

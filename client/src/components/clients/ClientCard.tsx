@@ -1,4 +1,5 @@
 import type { NewClient, Client } from '../../types/clients';
+
 import {
     FaUserGear,
     FaUserLargeSlash,
@@ -29,7 +30,7 @@ const ClientCard = ({
                 <span
                     className={`client-card__status-dot client-card__status-dot--${client.status}`}
                 ></span>
-                <p>{client.name}</p>
+                <p className="client-card__name">{client.name}</p>
                 <button
                     className="client-card__btn-status"
                     onClick={() => toggleClientStatus(client)}
@@ -41,8 +42,8 @@ const ClientCard = ({
                     )}
                 </button>
             </div>
-            <p>{client.email}</p>
-            <p>{client.phone}</p>
+            <p className="client-card__email">{client.email}</p>
+            <p className="client-card__phone">{client.phone}</p>
             <button
                 className="client-card__btn"
                 onClick={() => {

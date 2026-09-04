@@ -1,4 +1,5 @@
 import { useEffect } from 'react';
+
 import { IoMdClose } from 'react-icons/io';
 
 type ToastProps = {

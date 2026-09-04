@@ -1,0 +1,106 @@
+@use '../../utils/variables' as *;
+@use '../../utils/mixins' as *;
+
+.task-details-modal {
+    &__backdrop {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-color: rgba($black, 0.7);
+        backdrop-filter: blur(4px);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+        visibility: hidden;
+        opacity: 0;
+        transition: all 0.3s ease-in-out;
+
+        &.show {
+            visibility: visible;
+            opacity: 1;
+        }
+    }
+
+    &__modal {
+        width: 100vw;
+        height: 100vh;
+        background: $bg-gradient-dark;
+        border: none;
+        border-radius: 0;
+        padding: 50px 20px 20px;
+        position: relative;
+        text-align: left;
+        color: $white;
+        overflow-y: auto;
+
+        @include tablet {
+            width: 90%;
+            max-width: 700px;
+            height: auto;
+            max-height: 85vh;
+            border-radius: 12px;
+            border: 1px solid $color-dark-gray;
+            padding: 40px 30px;
+            box-shadow: 0 15px 40px rgba($black, 0.6);
+        }
+
+        h2 {
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            color: $white;
+            text-align: center;
+            padding: 0 20px;
+        }
+    }
+
+    &__content {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    &__status,
+    &__label {
+        font-size: 1.1rem;
+        color: $color-accent-gray;
+        margin: 0;
+
+        strong {
+            color: $white;
+        }
+    }
+
+    &__desc {
+        white-space: pre-wrap;
+        font-size: 1rem;
+        color: $color-accent-gray;
+        line-height: 1.6;
+        margin: 0;
+        background: rgba(255, 255, 255, 0.03);
+        padding: 15px;
+        border-radius: 12px;
+        border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    &__cancel-btn {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        background: transparent;
+        border: none;
+        color: $color-light-gray;
+        font-size: 1.5rem;
+        cursor: pointer;
+        transition: color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        &:hover {
+            color: $white;
+        }
+    }
+}

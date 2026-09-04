@@ -70,18 +70,3 @@ export const getClients = async (req : Request, res: Response) => {
     }
 };
 
-export const getClient = async (req : Request, res: Response) => {
-    try {
-        const clientId = req.params.id;
-
-        const client = await Client.findById(clientId);
-
-        if (!client) {
-            return res.status(404).json({ message: 'Client not found' });
-        }
-
-        return res.status(200).json(client);
-    } catch (err) {
-        errorHandler(err, res, 'to fetch client');
-    }
-};

@@ -4,17 +4,19 @@
 .custom-select {
     position: relative;
     width: 100%;
+    display: flex;
+    justify-content: center;
     user-select: none;
 
     @include desktop {
-        width: 230px;
+        max-width: 450px;
     }
 
     &__trigger {
         background: $white;
         color: $black;
         padding: 10px 16px;
-        border-radius: 20px;
+        border-radius: 12px;
         cursor: pointer;
         display: flex;
         justify-content: space-between;
@@ -24,12 +26,21 @@
         transition: all 0.3s ease;
         width: 100%;
 
+        span {
+            flex: 1;
+            min-width: 0;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-right: 10px;
+            text-align: left;
+        }
+
         @include tablet {
             font-size: 1.1rem;
         }
 
         @include desktop {
-            width: 230px;
             padding: 12px 20px;
         }
 
@@ -45,7 +56,7 @@
         right: 0;
         background: $bg-gradient-dark;
         border: 1px solid $btn-color;
-        border-radius: 15px;
+        border-radius: 12px;
         overflow: hidden;
         z-index: 100;
         overflow-y: auto;
@@ -64,6 +75,10 @@
         color: $white;
         cursor: pointer;
         transition: background 0.3s;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
 
         @include tablet {
             font-size: 1.1rem;

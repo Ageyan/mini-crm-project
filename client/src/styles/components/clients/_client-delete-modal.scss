@@ -19,7 +19,7 @@
     &__modal {
         background: $bg-gradient-dark;
         border: 1px solid $color-dark-gray;
-        border-radius: 16px;
+        border-radius: 12px;
         padding: 30px 20px;
         width: 90%;
         max-width: 420px;
@@ -67,7 +67,7 @@
         background-color: $delete;
         color: $white;
         border: none;
-        border-radius: 8px;
+        border-radius: 12px;
         padding: 12px 24px;
         font-size: 1.1rem;
         font-weight: 600;

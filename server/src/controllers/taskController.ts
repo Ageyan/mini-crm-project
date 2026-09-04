@@ -6,11 +6,12 @@ import Task from '../models/Task.js';
 
 export const createTask = async (req: Request , res: Response) => {
     try {
-        const { title, clientId } = req.body;
+        const { title, clientId, description } = req.body;
 
         const taskObj = {
             title,
             clientId,
+            description
         };
 
         const task = await Task.create(taskObj);
@@ -65,21 +66,5 @@ export const getTasks = async (req: Request , res: Response) => {
         return res.status(200).json(tasks);
     } catch (err) {
         errorHandler(err, res, 'to fetch tasks');
-    }
-};
-
-export const getTask = async (req: Request , res: Response) => {
-    try {
-        const taskId = req.params.id;
-
-        const task = await Task.findById(taskId);
-
-        if (!task) {
-            return res.status(404).json({ message: 'Task not found' });
-        }
-
-        return res.status(200).json(task);
-    } catch (err) {
-        errorHandler(err, res, 'to finding task');
     }
 };

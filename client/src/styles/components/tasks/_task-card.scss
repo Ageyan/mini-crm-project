@@ -2,9 +2,11 @@
 @use '../../utils/mixins' as *;
 
 .task-card {
-    border-radius: 20px;
+    width: 100%;
+    min-width: 0;
+    border-radius: 12px;
     background: $bg-gradient-main;
-    padding: 12px 6px;
+    padding: 12px;
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -14,12 +16,12 @@
 
     @include tablet {
         gap: 12px;
-        padding: 18px 38px;
+        padding: 18px;
         border-left: 8px solid $todo;
     }
 
     @include desktop {
-        padding: 22px 46px;
+        padding: 22px;
         gap: 14px;
 
         &:hover {
@@ -43,19 +45,29 @@
         }
     }
 
-    &__title {
-        font-size: 1.2rem;
-
-        @include tablet {
-            font-size: 1.3rem;
-        }
-    }
-
     &__text {
         font-size: 1rem;
+        text-align: left;
 
         @include tablet {
             font-size: 1.1rem;
+        }
+    }
+
+    &__title,
+    &__text {
+        width: 100%;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+    &__title {
+        font-size: 1.2rem;
+        text-align: center;
+
+        @include tablet {
+            font-size: 1.3rem;
         }
     }
 
@@ -63,12 +75,10 @@
         color: $white;
         background: $black;
         padding: 4px 10px;
-        margin: 0 auto;
-        max-width: 240px;
         width: 100%;
         height: 46px;
-        font-size: 1rem;
-        border-radius: 16px;
+        font-size: 0.9rem;
+        border-radius: 12px;
         cursor: pointer;
         font-weight: 400;
         border: 1px solid $color-dark-gray;
@@ -85,19 +95,19 @@
         }
     }
 
-    &__container {
+    &__btn-container {
         display: flex;
         justify-content: space-between;
-        gap: 6px;
+        gap: 10px;
     }
 
     &__status-btn {
         flex-grow: 1;
-        padding: 4px 6px;
-        border-radius: 16px;
-        font-size: 0.8rem;
-        width: 110px;
-        height: 36px;
+        padding: 6px;
+        width: 100px;
+        border-radius: 12px;
+        font-size: 0.75rem;
+        height: 40px;
         color: $white;
         cursor: pointer;
         font-weight: 400;

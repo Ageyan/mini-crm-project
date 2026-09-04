@@ -17,6 +17,10 @@ const taskSchema = new Schema<ITask>(
             enum: ['todo', 'in-progress', 'done'],
             default: 'todo',
         },
+        description: {
+            type: String,
+            default: ''
+        }
     },
     {
         timestamps: true,

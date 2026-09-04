@@ -4,26 +4,30 @@
 @use './base/reset';
 @use './base/typography';
 
+@use './layouts/layout';
+
+@use './pages/tasks';
+@use './pages/login';
+@use './pages/dashboard';
+@use './pages/clients-page';
+
 @use './components/clients/client-card';
 @use './components/clients/client-delete-modal';
 @use './components/clients/client-filter';
 @use './components/clients/client-search';
 @use './components/clients/clients-container';
 @use './components/clients/clients-form';
-@use './components/clients/clients-page';
 
 @use './components/common/error-empty-message';
 @use './components/common/loader';
 @use './components/common/toast';
 
+@use './components/dashboard/dash-card';
+
+@use './components/layout/header';
+
 @use './components/tasks/task-card';
 @use './components/tasks/task-custom-select';
+@use './components/tasks/task-details-modal';
 @use './components/tasks/task-filter';
 @use './components/tasks/task-form';
-@use './components/tasks/tasks';
-
-@use './components/dash-card';
-@use './components/dashboard';
-@use './components/header';
-@use './components/layout';
-@use './components/login';

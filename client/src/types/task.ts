@@ -6,6 +6,7 @@ export interface Task {
     title: string;
     clientId: string | Client | null;
     status: TaskStatus;
+    description: string;
 }
 
 export type NewTask = Omit<Task, 'id' | 'clientId'> & {

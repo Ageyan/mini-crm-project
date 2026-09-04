@@ -1,5 +1,5 @@
-@use '../utils/variables' as *;
-@use '../utils/mixins' as *;
+@use '../../utils/variables' as *;
+@use '../../utils/mixins' as *;
 
 .header {
     @include container;
@@ -37,7 +37,7 @@
         width: 140px;
         height: 52px;
         font-size: 1rem;
-        border-radius: 20px;
+        border-radius: 12px;
         cursor: pointer;
         border: 1px solid $white;
         transition: all 0.5s ease-in-out;

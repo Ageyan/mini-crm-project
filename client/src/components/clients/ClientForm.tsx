@@ -1,4 +1,5 @@
 import type { Client, NewClient } from '../../types/clients';
+
 import Loader from '../common/Loader';
 
 type ClientFormProps = {

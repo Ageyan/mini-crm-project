@@ -11,6 +11,7 @@ import TaskFilter from '../components/tasks/TaskFilter';
 import TaskCard from '../components/tasks/TaskCard';
 import Loader from '../components/common/Loader';
 import Toast from '../components/common/Toast';
+import TaskDetailsModal from '../components/tasks/TaskDetailsModal';
 
 function Tasks() {
     const { tasks, setTasks, clients, loader, error } = useCRMData();
@@ -19,6 +20,7 @@ function Tasks() {
         title: '',
         status: 'todo',
         clientId: '',
+        description: '',
     });
     const [toast, setToast] = useState<ToastState>({
         show: false,
@@ -26,12 +28,23 @@ function Tasks() {
         type: 'success',
     });
     const [editingTask, setEditingTask] = useState<Task | null>(null);
+    const [detailsModal, setDetailsModal] = useState<boolean>(false);
+    const [task, setTask] = useState<Task | null>(null);
+    const [btnLoader, setBtnLoader] = useState<boolean>(false);
 
     const handleSubmit = async (event: React.SubmitEvent) => {
         event.preventDefault();
 
-        if (!form.title || !form.clientId) return;
+        if (!form.title || !form.clientId || !form.description.trim()) {
+            setToast({
+                show: true,
+                message: 'Please fill in all fields',
+                type: 'error',
+            });
+            return;
+        }
 
+        setBtnLoader(true);
         try {
             if (editingTask) {
                 const update = await updateTask(editingTask.id, form);
@@ -61,6 +74,7 @@ function Tasks() {
                 title: '',
                 status: 'todo',
                 clientId: '',
+                description: '',
             });
         } catch (err) {
             let errorMessage = 'An unexpected error occurred';
@@ -76,6 +90,8 @@ function Tasks() {
                 message: errorMessage,
                 type: 'error',
             });
+        } finally {
+            setBtnLoader(false);
         }
     };
 
@@ -151,6 +167,7 @@ function Tasks() {
                 clients={clients}
                 handleSubmit={handleSubmit}
                 editingTask={editingTask}
+                btnLoader={btnLoader}
             />
             {error && <div className="error-message">{error}</div>}
             {loader && <Loader />}
@@ -166,6 +183,8 @@ function Tasks() {
                                 setEditingTask={setEditingTask}
                                 handleDeleteTask={handleDeleteTask}
                                 handleChangeStatus={handleChangeStatus}
+                                setDetailsModal={setDetailsModal}
+                                setTask={setTask}
                             />
                         ))}
                         {filteredTask.length === 0 && (
@@ -176,6 +195,12 @@ function Tasks() {
                     </div>
                 </div>
             )}
+            <TaskDetailsModal
+                detailsModal={detailsModal}
+                setDetailsModal={setDetailsModal}
+                setTask={setTask}
+                task={task}
+            />
             <Toast
                 show={toast.show}
                 message={toast.message}

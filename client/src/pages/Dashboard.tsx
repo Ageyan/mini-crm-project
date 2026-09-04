@@ -1,6 +1,6 @@
 import { useCRMData } from '../hooks/useCRMData';
 
-import DashCard from '../components/DashCard';
+import DashCard from '../components/dashboard/DashCard';
 import Loader from '../components/common/Loader';
 
 function Dashboard() {
