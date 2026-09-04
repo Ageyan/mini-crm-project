@@ -1,4 +1,7 @@
+import { useModalClose } from '../../hooks/useModalClose';
+
 interface ClientDeleteModal {
+    isDeleteModal: boolean;
     setIsDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
     setIdDeleteClient: React.Dispatch<React.SetStateAction<string | null>>;
     handleDeleteClient: (id: string | null) => Promise<void>;
@@ -6,14 +9,17 @@ interface ClientDeleteModal {
 }
 
 const ClientDeleteModal = ({
+    isDeleteModal,
     setIsDeleteModal,
     setIdDeleteClient,
     handleDeleteClient,
     idDeleteClient,
 }: ClientDeleteModal) => {
+    useModalClose(isDeleteModal, () => setIsDeleteModal(false));
+
     return (
         <div
-            className="client-delete__backdrop"
+            className={`client-delete__backdrop ${isDeleteModal ? 'show' : ''}`}
             onClick={() => {
                 setIsDeleteModal(false);
                 setIdDeleteClient(null);

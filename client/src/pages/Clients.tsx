@@ -261,14 +261,13 @@ function Clients() {
                 setIsDeleteModal={setIsDeleteModal}
                 setIdDeleteClient={setIdDeleteClient}
             />
-            {isDeleteModal && (
-                <ClientDeleteModal
-                    setIsDeleteModal={setIsDeleteModal}
-                    setIdDeleteClient={setIdDeleteClient}
-                    handleDeleteClient={handleDeleteClient}
-                    idDeleteClient={idDeleteClient}
-                />
-            )}
+            <ClientDeleteModal
+                isDeleteModal={isDeleteModal}
+                setIsDeleteModal={setIsDeleteModal}
+                setIdDeleteClient={setIdDeleteClient}
+                handleDeleteClient={handleDeleteClient}
+                idDeleteClient={idDeleteClient}
+            />
             <Toast
                 show={toast.show}
                 message={toast.message}

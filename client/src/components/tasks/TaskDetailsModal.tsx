@@ -1,3 +1,4 @@
+import { useModalClose } from '../../hooks/useModalClose';
 import type { Task } from '../../types/task';
 
 interface TaskDetailsModalProps {
@@ -14,6 +15,8 @@ export const TaskDetailsModal = ({
     task,
 }: TaskDetailsModalProps) => {
     if (!detailsModal || !task) return null;
+
+    useModalClose(detailsModal, () => setDetailsModal(false));
 
     return (
         <div
@@ -42,6 +45,14 @@ export const TaskDetailsModal = ({
                 <div className="task-details-modal__content">
                     <p className="task-details-modal__status">
                         <strong>Status:</strong> <span>{task.status}</span>
+                    </p>
+                    <p className="task-details-modal__status">
+                        <strong>Client:</strong>{' '}
+                        <span>
+                            {typeof task.clientId === 'string' || !task.clientId
+                                ? 'Unknown client'
+                                : task.clientId.name}
+                        </span>
                     </p>
                     <p className="task-details-modal__label">
                         <strong>Description:</strong>
