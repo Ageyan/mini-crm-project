@@ -35,7 +35,6 @@
         text-align: center;
         color: $white;
         box-shadow: 0 15px 40px rgba($black, 0.6);
-        animation: modalFadeIn 0.3s ease forwards;
 
         @include tablet {
             padding: 40px 30px;
@@ -92,16 +91,5 @@
         &:active {
             transform: scale(0.98);
         }
-    }
-}
-
-@keyframes modalFadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0);
     }
 }

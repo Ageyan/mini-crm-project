@@ -15,8 +15,8 @@ export const useModalClose = (isOpen: boolean, onClose: () => void) => {
         document.addEventListener('keydown', handleClose);
 
         return () => {
-            document.body.style.overflow = 'auto';
+            document.body.style.overflow = '';
             document.removeEventListener('keydown', handleClose);
         }
-    }, [isOpen, onClose])
+    }, [isOpen])
 }

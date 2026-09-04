@@ -14,9 +14,12 @@ export const TaskDetailsModal = ({
     setTask,
     task,
 }: TaskDetailsModalProps) => {
-    if (!detailsModal || !task) return null;
+    useModalClose(detailsModal, () => {
+        setDetailsModal(false);
+        setTask(null);
+    });
 
-    useModalClose(detailsModal, () => setDetailsModal(false));
+    if (!detailsModal || !task) return null;
 
     return (
         <div
