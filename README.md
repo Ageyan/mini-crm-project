@@ -23,6 +23,13 @@ A modern, responsive full-stack application designed to efficiently manage clien
   - Toast notifications for errors and success states.
   - **Input Protection:** Advanced CSS handling (ellipses, min-widths, overflow handling) to prevent layout breaks from very long, unbroken user input.
 
+## 🌍 Live Demo
+**Check out the live application here:** [Open Live App](https://mini-crm-project-kela.vercel.app)
+
+**Test Credentials:**
+- Email: `admin@crm.com`
+- Password: `admin123`
+
 ## 🛠 Tech Stack
 
 ### Frontend
@@ -51,6 +58,17 @@ A modern, responsive full-stack application designed to efficiently manage clien
 
 ## 📸 Screenshots
 
+<img width="1710" height="1107" alt="Screenshot auth page" src="https://github.com/user-attachments/assets/bea71bdb-6eb3-471f-b291-cd651ac211f1" />
+
+<img width="1710" height="1107" alt="Screenshot dashboard" src="https://github.com/user-attachments/assets/43845f56-a678-4cda-be4e-0a774c6306c9" />
+
+<img width="1710" height="1107" alt="Screenshot clients page" src="https://github.com/user-attachments/assets/2aee1a62-08a2-4e7c-b1c0-6cf45e6e52d6" />
+
+<img width="1710" height="1107" alt="Screenshot tasks page" src="https://github.com/user-attachments/assets/0b685f46-a16b-463b-86c9-37eb7c0255c2" />
+
+<img width="270" height="580" alt="Screenshot dashboard mobile" src="https://github.com/user-attachments/assets/d1eca282-57de-42ec-874a-172b1a3e63e1" />
+
+<img width="270" height="580" alt="Screenshot modal delete mobile" src="https://github.com/user-attachments/assets/6a2a9433-5e09-43f4-889d-3c9eca47092a" />
 
 ## 🚀 Getting Started
 
