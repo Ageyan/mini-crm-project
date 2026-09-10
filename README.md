@@ -37,7 +37,7 @@ design across all devices.
 ## 🌍 Live Demo
 
 **Check out the live application here:**
-[Open Live App](https://mini-crm-project-kela.vercel.app)
+[Open Live App](https://aheienko-mini-crm.vercel.app)
 
 **Test Credentials:**
 
